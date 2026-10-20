@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex">
 <title>의약품 유통 기업 홈페이지 데모</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/static/pretendard.min.css">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#fff; --soft:#f5f8fc; --line:#e4e9f0; --ink:#121a26; --ink-2:#4a5568; --ink-3:#718096;
@@ -450,6 +450,179 @@ table.list td{padding:14px;border-bottom:1px solid var(--line);vertical-align:mi
 .hx .slogan{transition:opacity .5s}
 @media (prefers-reduced-motion:reduce){.hx .card>img.on{animation:none}.marq{animation:none}}
 @media (max-width:1000px){.dots{right:12px;top:24px;transform:none;flex-direction:row}}
+
+/* ===== v3: Travel 레퍼런스 ===== */
+.serif,.mega,.value h2{font-family:"Inter Tight",Pretendard,sans-serif;font-weight:600;letter-spacing:-.045em}
+/* 풀블리드 히어로 */
+.hv{position:relative;min-height:100vh;min-height:100svh;color:#fff;display:flex;flex-direction:column;justify-content:center;overflow:hidden;isolation:isolate;margin-top:-72px;padding-top:72px}
+.hv>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;opacity:0;transition:opacity 1.2s ease}
+.hv>img.on{opacity:1;animation:kb 9s ease-out forwards}
+.hv::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(6,18,40,.55) 0%,rgba(6,18,40,.25) 40%,rgba(6,18,40,.7) 100%)}
+.hv .center{text-align:center;padding:0 20px;margin-bottom:120px}
+.mega{font-size:clamp(64px,13vw,210px);line-height:.9;margin:0;transition:opacity .5s,transform .6s;text-shadow:0 2px 30px rgba(0,0,0,.18)}
+.kosub{font-size:clamp(15px,1.6vw,19px);max-width:560px;margin:22px auto 0;opacity:.92}
+.hv .dots{right:28px}
+.qconsult{position:absolute;left:0;right:0;bottom:0;display:grid;grid-template-columns:1fr 1fr 1.6fr 220px;background:rgba(10,24,48,.38);backdrop-filter:blur(16px);border-top:1px solid rgba(255,255,255,.25)}
+.qconsult label{display:flex;flex-direction:column;gap:4px;padding:16px 22px;border-right:1px solid rgba(255,255,255,.2);cursor:pointer}
+.qconsult label span{font-size:12px;font-weight:700;opacity:.8}
+.qconsult select,.qconsult input{background:transparent;border:0;color:#fff;font-size:16px;font-weight:700;outline:0;padding:2px 0;width:100%;appearance:none;-webkit-appearance:none}
+.qconsult select option{color:#111}
+.qconsult input::placeholder{color:rgba(255,255,255,.65);font-weight:500}
+.qconsult button{border:0;background:#fff;color:#111;font-weight:900;font-size:17px;display:flex;align-items:center;justify-content:center;gap:8px;transition:background .15s}
+.qconsult button:hover{background:#eaf2fd}
+/* 헤더: 히어로 위 투명 → 스크롤 시 흰색 */
+.hd2{background:transparent;backdrop-filter:none;transition:background .25s,box-shadow .25s}
+.hd2 .logo,.hd2 .logo small{color:#fff}
+.hd2 .logo i{background:#fff;color:var(--brand)}
+.hd2 .navpill{border-color:rgba(255,255,255,.35)}
+.hd2 .navpill a{color:rgba(255,255,255,.92)}
+.hd2 .navpill a:hover{background:rgba(255,255,255,.15);color:#fff}
+.hd2 .pill{border-color:#fff}
+.hd2.solid{background:rgba(255,255,255,.95);backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--line)}
+.hd2.solid .logo,.hd2.solid .logo small{color:#111}
+.hd2.solid .logo i{background:var(--brand);color:#fff}
+.hd2.solid .navpill{border-color:var(--line)}
+.hd2.solid .navpill a{color:var(--ink-2)}
+.hd2.solid .navpill a:hover{background:#f3f6fa;color:#111}
+.hd2.solid .pill{border-color:#111}
+.hd2 .burger{background:rgba(255,255,255,.2);color:#fff}
+.hd2.solid .burger{background:#f3f6fa;color:#111}
+
+/* 섹션 공통 */
+.s3{max-width:1240px;margin:0 auto;padding:120px 24px}
+.badges{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:34px}
+.badges span{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:14px;font-weight:700;box-shadow:0 2px 8px rgba(18,26,38,.05)}
+.badges svg{color:var(--brand)}
+.statement3{text-align:center;font-size:clamp(40px,6.4vw,88px);line-height:1.06;letter-spacing:-.045em;font-weight:800;margin:0}
+.statement3 .ind{display:inline-flex;align-items:center;gap:0;padding-left:min(18vw,220px);position:relative}
+.statement3 .dash{position:absolute;left:0;top:60%;width:min(16vw,190px);border-top:2px dashed #7aa7e6}
+.statement3 .dash::before{content:"";position:absolute;left:-5px;top:-6px;width:10px;height:10px;background:#7aa7e6;transform:rotate(45deg)}
+.statement3 .target{position:absolute;left:min(16vw,190px);top:60%;transform:translate(-50%,-50%);width:46px;height:46px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;box-shadow:0 0 0 8px rgba(31,95,191,.15),0 0 0 16px rgba(31,95,191,.07);font-style:normal}
+.lead3{text-align:center;color:var(--ink-2);font-size:18px;max-width:600px;margin:30px auto 0}
+.nums3{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:64px;border-top:1px solid var(--line);padding-top:36px}
+.nums3 b{font-size:clamp(44px,5vw,72px);font-weight:900;letter-spacing:-.04em;line-height:1;display:block}
+.nums3 sup{font-size:.42em;color:var(--brand);margin-left:2px}
+.nums3 div:nth-child(2) sup{color:#e2483d}
+.nums3 div>span{color:var(--ink-3);display:block;margin-top:8px}
+.tagpill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:800}
+.tagpill i{width:7px;height:7px;border-radius:50%;background:var(--brand)}
+
+/* 가치·사업 */
+.value{display:grid;grid-template-columns:.8fr 1.6fr;gap:40px;align-items:center;padding-top:0}
+.value h2{font-size:clamp(42px,5vw,68px);line-height:1;margin:24px 0 16px}
+.value p{color:var(--ink-2);margin:0 0 28px;max-width:320px}
+.pill.blk{background:#111;color:#fff;border-color:#111}
+.pill.blk .ar{background:#fff;color:#111}
+.vcards{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:16px;align-items:end}
+.vc{margin:0}
+.vc .im{position:relative;border-radius:22px;overflow:hidden}
+.vc img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
+.vc:hover img{transform:scale(1.06)}
+.vc .im span{position:absolute;right:14px;bottom:12px;color:#fff;font-weight:800;font-size:15px;text-shadow:0 1px 8px rgba(0,0,0,.4)}
+.vc.tall .im{height:380px}
+.vc.mid .im{height:300px}
+.vc.short .im{height:250px;margin-bottom:60px}
+.vc figcaption{padding:12px 4px 0;color:var(--ink-3);font-size:14px;line-height:1.5}
+.vc figcaption b{display:block;color:#111;font-size:18px;margin-bottom:2px}
+
+/* 띠 */
+.band{background:#0d1b33;color:#fff;overflow:hidden;padding:22px 0}
+.band .track{display:flex;width:max-content;animation:mq 34s linear infinite;font-size:clamp(20px,2.4vw,30px);font-weight:800;letter-spacing:-.02em;white-space:nowrap}
+.band span{padding-right:20px}
+
+/* 등장 효과 */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.vcards .reveal:nth-child(2){transition-delay:.12s}
+.vcards .reveal:nth-child(3){transition-delay:.24s}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.band .track{animation:none}.hv>img.on{animation:none}}
+
+/* 지도(OSM) */
+.mapbox iframe{width:100%;height:100%;border:0;display:block}
+
+/* 관리자 v3 */
+.login{max-width:400px;margin:80px auto;background:#fff;border:1px solid var(--line);border-radius:24px;padding:32px}
+.login h2{font-size:24px;margin-bottom:6px}
+.atabs{display:flex;gap:6px;margin:20px 0 0}
+.atabs button{height:40px;padding:0 16px;border-radius:999px;border:1px solid var(--line);background:#fff;font-weight:800}
+.atabs button.on{background:#111;color:#fff;border-color:#111}
+table.list tr[data-row]{cursor:pointer}
+table.list tr[data-row]:hover td{background:#fafcff}
+.drawer{position:fixed;inset:0;z-index:96;background:rgba(15,23,36,.45);display:flex;justify-content:flex-end}
+.drawer .box{background:#fff;width:min(440px,100%);height:100%;overflow:auto;padding:28px}
+.drawer dl{display:grid;grid-template-columns:90px 1fr;gap:10px 12px;margin:18px 0}
+.drawer dt{color:var(--ink-3);font-size:14px}
+.drawer dd{margin:0;font-weight:600;white-space:pre-wrap;word-break:break-all}
+.edit{display:grid;gap:14px;margin-top:16px}
+.edit .card2{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px}
+.edit h3{font-size:16px;margin:0 0 10px}
+.edit input{height:44px;border:1px solid #cfd8e3;border-radius:10px;padding:0 12px;width:100%;font-size:15px}
+.edit .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+
+@media (max-width:1000px){
+  .hv .center{margin-bottom:200px}
+  .qconsult{grid-template-columns:1fr 1fr}
+  .qconsult label{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.2)}
+  .qconsult label.wide{grid-column:1/-1}
+  .qconsult button{grid-column:1/-1;height:56px}
+  .hv{min-height:760px}
+  .s3{padding:80px 20px}
+  .statement3 .ind{padding-left:0;padding-top:70px}
+  .statement3 .dash{left:50%;top:10px;width:0;height:44px;border-top:0;border-left:2px dashed #7aa7e6}
+  .statement3 .dash::before{left:-6px;top:-6px}
+  .statement3 .target{left:50%;top:44px}
+  .nums3{grid-template-columns:1fr 1fr;row-gap:28px}
+  .value{grid-template-columns:1fr}
+  .vcards{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:72%;overflow-x:auto;scroll-snap-type:x mandatory;align-items:start;padding-bottom:6px}
+  .vc{scroll-snap-align:start}
+  .vc.tall .im,.vc.mid .im,.vc.short .im{height:300px;margin:0}
+  .edit .grid{grid-template-columns:1fr 1fr}
+}
+
+/* ===== 검토 반영 ===== */
+body{word-break:keep-all;overflow-wrap:anywhere}
+.agree{min-height:44px}
+.agree button{white-space:nowrap;padding:11px 4px}
+.hd2 .logo{justify-self:start}
+.navpill a:hover,.hd2.solid .navpill a:hover{background:transparent;color:var(--brand)}
+.hd2.solid .burger{background:#fff;border:1px solid var(--line)}
+.logos2 a:hover{background:#fff}
+.chips input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+.chips label:focus-within{outline:2px solid var(--brand);outline-offset:2px}
+.dots button{width:24px;height:24px;border:0;background:transparent;position:relative}
+.dots button::after{content:"";position:absolute;inset:7px;border-radius:50%;border:1.5px solid #fff}
+.dots button.on::after{background:#fff}
+.demobar button{min-height:40px}
+.ft2 .info a{display:inline-block;padding:12px 0}
+.f select{appearance:none;-webkit-appearance:none;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6' fill='none' stroke='%23718096' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 16px center;padding-right:40px}
+.form .grid2 .f{margin-top:14px}
+.darkcard{min-height:300px}
+.darkcard .steps em{opacity:.85}
+.map2 .addr{display:flex;flex-direction:column}
+.map2 .addr .acts{margin-top:auto;display:flex;gap:8px;padding-top:16px;border:0}
+.marq{font-family:"Inter Tight",sans-serif;font-weight:600;letter-spacing:-.04em}
+/* 관리자·구축 방식: 흰 배경, 새 톤 */
+.admin{background:#fff}
+.admin .top{position:sticky;top:0;z-index:5}
+.kpi,.panel2,.log{box-shadow:none}
+table.list th,.cmp th{background:#fff}
+.toolbar input{border-radius:999px}
+.how .eyebrow{color:var(--ink-3);letter-spacing:0;font-weight:700}
+.how .eyebrow::before{content:"+ "}
+.cmpwrap{overflow-x:auto;border:1px solid var(--line);border-radius:16px}
+.cmp{border-collapse:separate;border-spacing:0;min-width:620px}
+.cmp th,.cmp td{border:0;border-bottom:1px solid var(--line)}
+.cmp tr:last-child th,.cmp tr:last-child td{border-bottom:0}
+.cmp th:first-child{white-space:nowrap}
+@media (max-width:1000px){
+  .orgtree .line{display:none}
+  .orgtree .row{padding-top:16px}
+  .demobar{padding:6px 10px calc(6px + env(safe-area-inset-bottom))}
+  .mbar{bottom:calc(52px + env(safe-area-inset-bottom))}
+}
+@media (min-width:600px) and (max-width:1000px){
+  .vcards{grid-auto-columns:42%}
+}
 </style>
 </head>
 <body>
@@ -481,7 +654,6 @@ table.list td{padding:14px;border-bottom:1px solid var(--line);vertical-align:mi
   <b>제안용 데모</b><span class="msg">회사명·숫자·연혁·주소·사진은 예시예요. 상담을 신청한 뒤 '관리자'에서 확인해 보세요.</span><span class="sp"></span>
   <button data-go="site" class="on">홈페이지</button><button data-go="admin">관리자</button><button data-go="how">구축 방식</button>
 </div>
-
 <div id="site">
 <header class="hd2" id="hd"><div class="in">
   <a class="logo" href="#top"><i><svg width="20" height="20"><use href="#i-logo"/></svg></i><span>○○팜 <small>(예시)</small></span></a>
@@ -489,61 +661,59 @@ table.list td{padding:14px;border-bottom:1px solid var(--line);vertical-align:mi
   <div class="right"><a class="pill" href="#consult">상담 신청 <span class="ar"><svg width="14" height="14"><use href="#i-out"/></svg></span></a><button class="burger" id="burger" aria-label="메뉴 열기"><svg width="22" height="22"><use href="#i-menu"/></svg></button></div>
 </div></header>
 
-<section class="hx" id="top"><div class="card">
-  <img class="on" src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=1800&q=70&auto=format&fit=crop" alt=""><img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1800&q=70&auto=format&fit=crop" alt="" loading="lazy"><img src="https://images.unsplash.com/photo-1586015555751-63bb77f4322a?w=1800&q=70&auto=format&fit=crop" alt="" loading="lazy"><div class="dots" id="dots"><button class="on" aria-label="1번 화면"></button><button aria-label="2번 화면"></button><button aria-label="3번 화면"></button></div>
-  <div>
-    <p class="big serif" id="slogan">Steady<br>Care</p>
-    <h1>원장님의 진료가 멈추지 않도록</h1>
-    <p>정신과 전문 의약품의 안정적인 공급부터 개원과 병원 마케팅까지, 한 곳에서 책임지고 함께합니다.</p>
-    <div class="ctas"><a class="pill w" href="#consult">개원·납품 상담 신청 <span class="ar"><svg width="14" height="14"><use href="#i-out"/></svg></span></a><a class="pill ghost" href="#" data-order>의약품 주문하기 <svg width="16" height="16"><use href="#i-out"/></svg></a></div>
+<section class="hv" id="top">
+  <img class="on" src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=2000&q=70&auto=format&fit=crop" alt="">
+  <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=2000&q=70&auto=format&fit=crop" alt="" loading="lazy">
+  <img src="https://images.unsplash.com/photo-1586015555751-63bb77f4322a?w=2000&q=70&auto=format&fit=crop" alt="" loading="lazy">
+  <div class="dots" id="dots"><button class="on" aria-label="1번 화면"></button><button aria-label="2번 화면"></button><button aria-label="3번 화면"></button></div>
+  <div class="center">
+    <p class="mega" id="slogan">Steady Care</p>
+    <p class="kosub">원장님의 진료가 멈추지 않도록. 정신과 전문 의약품 공급부터 개원과 마케팅까지 한 곳에서.</p>
   </div>
-  <div class="stat"><span>적시 납품률 (예시)</span><b>99.8%</b><span>향정 포함 정기 납품 기준</span></div>
-  <div class="bottom">
-    <div class="tagchips"><span>의약품 전문 공급</span><span>개원 컨설팅</span><span>마케팅 지원</span></div>
-    <nav class="qbar" aria-label="빠른 메뉴">
-      <a href="#" data-order><svg width="26" height="26"><use href="#i-cart"/></svg>의약품 주문</a>
-      <a href="#consult"><svg width="26" height="26"><use href="#i-chat"/></svg>상담 신청</a>
-      <a href="#logistics"><svg width="26" height="26"><use href="#i-truck"/></svg>물류 경쟁력</a>
-      <a href="#partners"><svg width="26" height="26"><use href="#i-link"/></svg>전문 포털</a>
-    </nav>
-  </div>
-</div></section>
+  <form class="qconsult" id="qform">
+    <label><span>상담 분야</span><select id="qType"><option value="">선택해 주세요</option><option value="납품">의약품 납품</option><option value="개원">개원 컨설팅</option><option value="마케팅">마케팅</option><option value="기타">기타</option></select></label>
+    <label><span>지역</span><select id="qRegion"><option value="">선택해 주세요</option><option>서울</option><option>경기</option><option>인천</option><option>강원</option><option>충청</option><option>전라</option><option>경상</option><option>제주</option></select></label>
+    <label class="wide"><span>병원명</span><input id="qHospital" maxlength="40" placeholder="예) ○○정신건강의학과의원"></label>
+    <button type="submit">상담 신청 <svg width="16" height="16"><use href="#i-out"/></svg></button>
+  </form>
+</section>
 
-<section class="s2" id="about">
-  <div class="about2">
-    <div><span class="lbl">About Us</span>
-      <div class="ph"><img src="https://images.unsplash.com/photo-1586015555751-63bb77f4322a?w=500&q=70&auto=format&fit=crop" alt=""></div><span class="lbl">Our Logistics</span>
-    </div>
-    <div>
-      <p class="statement">정신과 원장님께 필요한 전문 의약품을 <em>빠짐없이</em> 공급하고, 개원 준비와 병원 운영까지 함께 고민합니다. 오래 함께할 수 있는 신뢰를 가장 먼저 생각합니다.</p>
-      <div class="nums2"><div><b>320<sup>+</sup></b><span>거래 의원</span></div><div><b>99.8<sup>%</sup></b><span>적시 납품률</span></div><div><b>45<sup>+</sup></b><span>개원 컨설팅</span></div></div>
-      <p class="ex" style="margin-top:10px">숫자와 연혁은 예시예요. 실제 자료를 받아 바꿔요.</p>
-    </div>
+<section class="s3" id="about">
+  <div class="badges reveal"><span><svg width="16" height="16"><use href="#i-shield"/></svg>정신과 전문 유통</span><span><svg width="16" height="16"><use href="#i-check"/></svg><b class="count" data-to="320">0</b>+ 거래 의원 <em class="ex">(예시)</em></span></div>
+  <h2 class="statement3 reveal">원장님의 진료가<br><span class="ind">멈추지 않도록<i class="dash"></i><i class="target"><svg width="22" height="22"><use href="#i-pill"/></svg></i></span></h2>
+  <p class="lead3 reveal">정신과 원장님께 필요한 전문 의약품을 빠짐없이 공급하고, 개원 준비와 병원 운영까지 함께 고민합니다.</p>
+  <div class="nums3 reveal"><div><b><span class="count" data-to="320">0</span><sup>+</sup></b><span>거래 의원</span></div><div><b><span class="count" data-to="99.8" data-dec="1">0</span><sup>%</sup></b><span>적시 납품률</span></div><div><b><span class="count" data-to="45">0</span><sup>+</sup></b><span>개원 컨설팅</span></div><div><b><span class="count" data-to="8">0</span><sup>년</sup></b><span>정신과 전문 유통</span></div></div>
+  <p class="ex" style="text-align:center;margin-top:10px">숫자·연혁·조직은 예시예요. 실제 자료를 받아 바꿔요.</p>
+</section>
+
+<section class="s3 value" id="biz">
+  <div class="vleft reveal">
+    <span class="tagpill"><i></i>01 Our Business</span>
+    <h2>Not Just<br>a Supplier</h2>
+    <p>의약품 공급만이 아니라, 개원 준비와 환자 유입까지 이어서 돕습니다.</p>
+    <a class="pill blk" href="#consult">상담 신청 <span class="ar"><svg width="14" height="14"><use href="#i-out"/></svg></span></a>
   </div>
-  <div class="tl2">
+  <div class="vcards">
+    <figure class="vc tall reveal"><div class="im"><img src="https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=800&q=70&auto=format&fit=crop" alt=""><span>Supply</span></div><figcaption><b>의약품 전문 공급</b>향정 전문 관리 · 품절 예상 품목 사전 안내 · 정기 납품</figcaption></figure>
+    <figure class="vc mid reveal"><div class="im"><img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=700&q=70&auto=format&fit=crop" alt=""><span>Clinic</span></div><figcaption><b>개원 컨설팅</b>입지 분석 · 인허가 안내 · 초도 의약품 구성</figcaption></figure>
+    <figure class="vc short reveal"><div class="im"><img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=700&q=70&auto=format&fit=crop" alt=""><span>Growth</span></div><figcaption><b>마케팅 지원</b>홈페이지·블로그 · 지도 노출 · 광고 심의 안내</figcaption></figure>
+  </div>
+</section>
+
+<section class="s3" id="history">
+  <span class="tagpill reveal"><i></i>02 History &amp; Team</span>
+  <div class="tl2 reveal">
     <div><b>2018</b><strong>회사 설립</strong><p>정신과 전문 의약품 유통 시작</p></div>
     <div><b>2021</b><strong>KGSP 적격 물류센터</strong><p>온도·습도 관리 보관 체계 구축</p></div>
     <div><b>2024</b><strong>개원·마케팅 컨설팅</strong><p>신규 개원 원장님 원스톱 지원</p></div>
     <div><b>2026</b><strong>공식 홈페이지 오픈</strong><p>온라인 상담 접수 시작</p></div>
   </div>
-  <div class="org"><h3>조직도 <span class="ex">(예시)</span></h3><div class="orgtree"><div class="ceo">대표이사</div><div class="line"></div><div class="row"><div><b>영업본부</b><span>의원 납품·거래 관리</span></div><div><b>물류센터</b><span>KGSP 보관·배송</span></div><div><b>컨설팅팀</b><span>개원·마케팅 지원</span></div><div><b>경영지원팀</b><span>정산·품질 관리</span></div></div></div></div>
+  <div class="org reveal"><h3>조직도 <span class="ex">(예시)</span></h3><div class="orgtree"><div class="ceo">대표이사</div><div class="line"></div><div class="row"><div><b>영업본부</b><span>의원 납품·거래 관리</span></div><div><b>물류센터</b><span>KGSP 보관·배송</span></div><div><b>컨설팅팀</b><span>개원·마케팅 지원</span></div><div><b>경영지원팀</b><span>정산·품질 관리</span></div></div></div></div>
 </section>
 
-<section class="bizwrap" id="biz"><div class="bizband">
-  <img src="https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=1800&q=60&auto=format&fit=crop" alt="">
-  <div>
-    <h2 class="serif">Supply,<br>Clinic,<br>Growth</h2>
-    <p>의약품 공급만이 아니라, 개원 준비와 환자 유입까지 이어서 돕습니다.</p>
-    <a class="pill w" href="#consult">상담 신청 <span class="ar"><svg width="14" height="14"><use href="#i-out"/></svg></span></a>
-  </div>
-  <div class="bcards">
-    <div class="bcard"><img src="https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=600&q=70&auto=format&fit=crop" alt=""><div class="t"><b>의약품 전문 공급</b><span>01</span></div><p>향정신성의약품 전문 관리, 품절 예상 품목 사전 안내, 정기 납품 일정 관리</p></div>
-    <div class="bcard"><img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600&q=70&auto=format&fit=crop" alt=""><div class="t"><b>개원 컨설팅</b><span>02</span></div><p>입지·상권 분석, 인허가·신고 절차 안내, 초도 의약품 구성</p></div>
-    <div class="bcard"><img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=70&auto=format&fit=crop" alt=""><div class="t"><b>마케팅 지원</b><span>03</span></div><p>홈페이지·블로그 운영 지원, 지도·검색 노출 관리, 의료광고 심의 안내</p></div>
-  </div>
-</div></section>
+<div class="band" aria-hidden="true"><div class="track"><span>KGSP 적격 보관 ✱ 향정 이중 잠금 ✱ NIMS 실시간 보고 ✱ 당일·익일 도착 ✱ 개원 컨설팅 ✱ </span><span>KGSP 적격 보관 ✱ 향정 이중 잠금 ✱ NIMS 실시간 보고 ✱ 당일·익일 도착 ✱ 개원 컨설팅 ✱ </span></div></div>
 
-<section class="s2 feat" id="logistics">
+<section class="s2 feat reveal" id="logistics">
   <span class="lbl" style="justify-content:center">Logistics</span>
   <h2 class="serif">Safe Delivery</h2>
   <p class="sub">의약품 유통품질관리기준(KGSP)에 맞춘 보관·배송 체계로, 향정은 한 알까지 기록합니다. <span class="ex">(문구는 예시예요)</span></p>
@@ -564,7 +734,7 @@ table.list td{padding:14px;border-bottom:1px solid var(--line);vertical-align:mi
   </div>
 </section>
 
-<section class="s2" id="partners" style="padding-top:0">
+<section class="s2 reveal" id="partners" style="padding-top:0">
   <div class="ttlrow"><h2 class="serif">Partners</h2><span class="ex">로고를 누르면 각 제약사 공식 홈페이지로 이동해요. (실제 로고는 받아서 넣어요)</span></div>
   <div class="logos2" id="logos"></div>
   <div class="portal" id="portal">
@@ -581,7 +751,7 @@ table.list td{padding:14px;border-bottom:1px solid var(--line);vertical-align:mi
     <h2 class="serif">Let's<br>Talk</h2>
     <p class="ko">상담을 남겨 주시면 담당자가 바로 연락드려요</p>
     <p class="muted" style="color:var(--ink-2);margin:0">신청이 들어오면 담당자 휴대폰으로 바로 알림이 가요.</p>
-    <div class="pts"><div><b>접수 즉시 알림</b><span>문자·카카오 알림톡</span></div><div><b>당일 회신</b><span>평일 오후 5시 전 신청 기준</span></div><div><b>안전한 정보 보관</b><span>상담 목적 외 사용 안 함</span></div></div>
+    <div class="pts"><div><b>접수 즉시 알림</b><span>문자·이메일 (알림톡 승인 후 전환)</span></div><div><b>당일 회신</b><span>평일 오후 5시 전 신청 기준</span></div><div><b>안전한 정보 보관</b><span>상담 목적 외 사용 안 함</span></div></div>
   </div>
   <form class="form" id="cform" novalidate>
     <h3>상담 신청</h3><p class="ex" style="margin:0 0 6px">* 표시는 꼭 적어 주세요</p>
@@ -589,7 +759,7 @@ table.list td{padding:14px;border-bottom:1px solid var(--line);vertical-align:mi
     <div class="grid2">
       <div class="f" data-f="hospital"><label for="hospital">병원명 <em>*</em></label><input id="hospital" maxlength="40" placeholder="예) ○○정신건강의학과의원" autocomplete="organization"><span class="msg">병원명을 적어 주세요</span></div>
       <div class="f" data-f="name"><label for="name">성함 <em>*</em></label><input id="name" maxlength="20" placeholder="예) 홍길동" autocomplete="name"><span class="msg">성함을 적어 주세요</span></div>
-      <div class="f" data-f="phone"><label for="phone">연락처 <em>*</em></label><input id="phone" inputmode="tel" maxlength="13" placeholder="010-0000-0000" autocomplete="tel"><span class="msg">휴대폰 번호를 정확히 적어 주세요</span></div>
+      <div class="f" data-f="phone"><label for="phone">연락처 <em>*</em></label><input id="phone" inputmode="tel" maxlength="13" placeholder="휴대폰 또는 병원 전화" autocomplete="tel"><span class="msg">연락받을 번호를 정확히 적어 주세요</span></div>
       <div class="f" data-f="region"><label for="region">지역 <em>*</em></label><select id="region"><option value="">선택해 주세요</option><option>서울</option><option>경기</option><option>인천</option><option>강원</option><option>충청</option><option>전라</option><option>경상</option><option>제주</option></select><span class="msg">지역을 골라 주세요</span></div>
     </div>
     <div class="f"><label for="memo">문의 내용</label><textarea id="memo" maxlength="1000" placeholder="개원 예정 시기, 필요한 품목 등 편하게 적어 주세요"></textarea></div>
@@ -601,54 +771,83 @@ table.list td{padding:14px;border-bottom:1px solid var(--line);vertical-align:mi
 <section class="s2" id="map" style="padding-top:0">
   <div class="ttlrow"><h2 class="serif">Location</h2></div>
   <div class="map2">
-    <div class="mapbox">
-      <svg viewBox="0 0 600 340" preserveAspectRatio="xMidYMid slice"><rect width="600" height="340" fill="#eef2f7"/><g stroke="#fff" stroke-width="14"><path d="M0 120h600M0 250h600M150 0v340M420 0v340"/></g><g stroke="#fff" stroke-width="6"><path d="M0 60h600M0 190h600M60 0v340M290 0v340M520 0v340"/></g><g fill="#dfe9d8"><rect x="300" y="200" width="110" height="40" rx="6"/><rect x="70" y="130" width="70" height="50" rx="6"/></g></svg>
-      <span class="pin"><svg width="40" height="40"><use href="#i-pin"/></svg></span>
-      <span class="note">실제 사이트에서는 카카오맵(또는 네이버 지도)이 들어가요</span>
-    </div>
+    <div class="mapbox"><iframe title="지도" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=126.64%2C37.52%2C126.70%2C37.56&amp;layer=mapnik&amp;marker=37.5455%2C126.6760"></iframe><span class="note">위치는 예시예요. 실제 사이트에서는 카카오맵(또는 네이버 지도) API로 넣어요</span></div>
     <div class="addr">
       <div><svg width="20" height="20"><use href="#i-pin"/></svg><span><b>주소</b>인천광역시 서구 ○○로 00 (예시)</span></div>
       <div><svg width="20" height="20"><use href="#i-phone"/></svg><span><b>대표 전화</b>000-0000-0000 (예시)</span></div>
       <div><svg width="20" height="20"><use href="#i-clock"/></svg><span><b>운영 시간</b>평일 09:00 ~ 18:00 · 주말·공휴일 휴무</span></div>
       <div><svg width="20" height="20"><use href="#i-truck"/></svg><span><b>물류센터</b>인천광역시 서구 ○○로 00 (예시)</span></div>
+      <div class="acts"><a class="pill" href="#" data-toast="전화">전화하기 <span class="ar"><svg width="14" height="14"><use href="#i-phone"/></svg></span></a><a class="pill" href="#" data-toast="길찾기">길찾기 <span class="ar"><svg width="14" height="14"><use href="#i-out"/></svg></span></a></div>
     </div>
   </div>
 </section>
 
 <footer class="ft2">
-  <div class="marq serif" aria-hidden="true"><span>○○Pharm ✱ Steady Care ✱ ○○Pharm ✱ Steady Care ✱</span><span>○○Pharm ✱ Steady Care ✱ ○○Pharm ✱ Steady Care ✱</span></div>
+  <div class="marq serif" aria-hidden="true"><span>OO Pharm ✱ Steady Care ✱ OO Pharm ✱ Steady Care ✱</span><span>OO Pharm ✱ Steady Care ✱ OO Pharm ✱ Steady Care ✱</span></div>
   <div class="info"><div><b>○○팜 (예시)</b><br>대표 ○○○ · 사업자등록번호 000-00-00000 · 의약품도매업 허가 제0000호<br>인천광역시 서구 ○○로 00 · 대표 전화 000-0000-0000</div><div><a href="#" id="privacyLink">개인정보처리방침</a><a href="#consult">상담 신청</a></div></div>
 </footer>
 
 <div class="mbar"><a href="tel:00000000000" id="callBtn"><svg width="18" height="18"><use href="#i-phone"/></svg>전화</a><a href="#" data-order><svg width="18" height="18"><use href="#i-cart"/></svg>주문</a><a class="p" href="#consult"><svg width="18" height="18"><use href="#i-chat"/></svg>상담 신청</a></div>
 </div>
 
-<div class="sheet" id="sheet" hidden><nav><a href="#about">회사소개</a><a href="#biz">사업분야</a><a href="#logistics">물류 경쟁력</a><a href="#partners">파트너·전문 포털</a><a href="#map">오시는 길</a><a href="#consult" class="btn btn-primary" style="margin-top:12px">상담 신청</a></nav></div>
+<div class="sheet" id="sheet" hidden><nav><a href="#about">회사소개</a><a href="#biz">사업분야</a><a href="#history">연혁·조직도</a><a href="#logistics">물류 경쟁력</a><a href="#partners">파트너·전문 포털</a><a href="#map">오시는 길</a><a href="#consult" class="btn btn-primary" style="margin-top:12px">상담 신청</a></nav></div>
 
-<div class="modal" id="terms" hidden><div class="box">
+<div class="modal" id="terms" hidden><div class="box" role="dialog" aria-label="개인정보 수집·이용 동의">
   <h3>개인정보 수집·이용 동의 <span class="ex">(예시 문안)</span></h3>
-  <table><tr><th>수집 항목</th><td>병원명, 성함, 연락처, 지역, 문의 내용</td></tr><tr><th>이용 목적</th><td>개원·납품·마케팅 상담 연락</td></tr><tr><th>보관 기간</th><td>상담 완료 후 1년 (요청 시 즉시 삭제)</td></tr></table>
+  <table><tr><th>수집 항목</th><td>상담 분야, 병원명, 성함, 연락처, 지역, 문의 내용</td></tr><tr><th>이용 목적</th><td>개원·납품·마케팅 상담 연락</td></tr><tr><th>보관 기간</th><td>상담 완료 후 1년 (요청 시 즉시 삭제)</td></tr></table>
   <p class="ex">동의하지 않으셔도 되지만, 이 경우 온라인 상담 신청은 할 수 없어요.</p>
   <button class="btn btn-primary btn-sm" data-close>확인</button>
 </div></div>
 
-<div class="modal" id="doneModal" hidden><div class="box done">
+<div class="modal" id="privacy" hidden><div class="box" role="dialog" aria-label="개인정보처리방침">
+  <h3>개인정보처리방침 <span class="ex">(예시 · 실제 문서는 귀사 기준으로 작성)</span></h3>
+  <p style="color:var(--ink-2);font-size:14px">○○팜(이하 '회사')은 상담 신청 시 받은 개인정보를 아래와 같이 처리합니다.</p>
+  <table><tr><th>처리 목적</th><td>상담 연락, 상담 이력 관리</td></tr><tr><th>처리 항목</th><td>병원명, 성함, 연락처, 지역, 문의 내용</td></tr><tr><th>보유 기간</th><td>상담 완료 후 1년</td></tr><tr><th>위탁</th><td>문자·이메일 발송 대행사, 서버(DB) 운영사</td></tr><tr><th>정보주체 권리</th><td>열람·정정·삭제 요청 가능</td></tr><tr><th>책임자</th><td>개인정보 보호책임자 ○○○</td></tr></table>
+  <button class="btn btn-primary btn-sm" data-close>닫기</button>
+</div></div>
+
+<div class="modal" id="doneModal" hidden><div class="box done" role="dialog" aria-label="접수 완료">
   <i><svg width="34" height="34"><use href="#i-check"/></svg></i>
   <h3>상담 신청이 접수됐어요</h3>
-  <p style="color:var(--ink-2)">담당자가 영업일 기준 당일 안에 연락드릴게요.<br><span class="ex">데모라서 실제로 연락이 가지는 않아요. 아래 '관리자'에서 접수된 내용을 확인해 보세요.</span></p>
+  <p style="color:var(--ink-2)">담당자가 영업일 기준 당일 안에 연락드릴게요.<br><span class="ex">데모라서 실제로 연락이 가지는 않아요. '관리자'에서 접수된 내용을 확인해 보세요.</span></p>
   <div style="display:flex;gap:8px;justify-content:center"><button class="btn btn-line btn-sm" data-close>닫기</button><button class="btn btn-primary btn-sm" data-go="admin">관리자에서 보기</button></div>
+</div></div>
+
+<div class="drawer" id="drawer" hidden><div class="box" role="dialog" aria-label="상담 상세">
+  <div style="display:flex;justify-content:space-between;align-items:center"><h3 style="font-size:20px" id="dTitle">상담 상세</h3><button class="btn btn-line btn-sm" data-close>닫기</button></div>
+  <dl id="dBody"></dl>
+  <div style="display:flex;gap:8px;flex-wrap:wrap"><a class="btn btn-primary btn-sm" id="dCall" href="#"><svg width="16" height="16"><use href="#i-phone"/></svg>전화 걸기</a><select class="st" id="dStatus" style="height:40px"></select></div>
+  <p class="ex" style="margin-top:14px">휴대폰으로 알림을 받은 담당자가 바로 열어 전화할 수 있게 만든 화면이에요.</p>
 </div></div>
 
 <!-- ===== 관리자 ===== -->
 <div class="admin" id="admin" hidden>
-  <div class="top"><div class="in"><h2>상담 접수 관리</h2><button class="btn btn-line btn-sm" id="csv"><svg width="16" height="16"><use href="#i-dl"/></svg>엑셀 받기</button></div></div>
+  <div class="top"><div class="in"><h2>○○팜 관리자</h2><span class="ex" id="who"></span><button class="btn btn-line btn-sm" id="logout" hidden>로그아웃</button></div></div>
   <div class="wrap">
-    <div class="kpis"><div class="kpi"><span>새 접수</span><b id="kNew">0</b></div><div class="kpi"><span>상담 중</span><b id="kIng">0</b></div><div class="kpi"><span>완료</span><b id="kDone">0</b></div><div class="kpi"><span>이번 달 전체</span><b id="kAll">0</b></div></div>
-    <div class="panel2">
-      <div class="toolbar"><input id="q" type="search" placeholder="병원명·성함 검색"><button class="fchip on" data-s="">전체</button><button class="fchip" data-s="new">새 접수</button><button class="fchip" data-s="ing">상담 중</button><button class="fchip" data-s="done">완료</button></div>
-      <table class="list"><thead><tr><th>접수 시각</th><th>병원 · 성함</th><th class="hm">분야</th><th class="hm">지역</th><th class="hm">연락처</th><th>처리 상태</th></tr></thead><tbody id="rows"></tbody></table>
+    <form class="login" id="login">
+      <h2>관리자 로그인</h2><p class="ex" style="margin:0 0 12px">실제로는 담당자 계정(이메일·비밀번호)으로만 들어와요. 데모라서 아무 값이나 넣어도 돼요.</p>
+      <div class="f"><label for="lid">아이디</label><input id="lid" value="manager@example.com" autocomplete="username"></div>
+      <div class="f"><label for="lpw">비밀번호</label><input id="lpw" type="password" value="demo1234" autocomplete="current-password"></div>
+      <button class="btn btn-primary" style="width:100%;margin-top:16px" type="submit">로그인</button>
+    </form>
+    <div id="adminBody" hidden>
+      <div class="atabs"><button class="on" data-tab="list">상담 접수</button><button data-tab="edit">홈페이지 내용 수정</button></div>
+      <div id="tabList">
+        <div class="kpis"><div class="kpi"><span>새 접수</span><b id="kNew">0</b></div><div class="kpi"><span>상담 중</span><b id="kIng">0</b></div><div class="kpi"><span>완료</span><b id="kDone">0</b></div><div class="kpi"><span>전체</span><b id="kAll">0</b></div></div>
+        <div class="panel2">
+          <div class="toolbar"><input id="q" type="search" placeholder="병원명·성함 검색"><button class="fchip on" data-s="">전체</button><button class="fchip" data-s="new">새 접수</button><button class="fchip" data-s="ing">상담 중</button><button class="fchip" data-s="done">완료</button><button class="btn btn-line btn-sm" id="csv" style="margin-left:auto"><svg width="16" height="16"><use href="#i-dl"/></svg>엑셀(CSV) 받기</button></div>
+          <table class="list"><thead><tr><th>접수 시각</th><th>병원 · 성함</th><th class="hm">분야</th><th class="hm">지역</th><th class="hm">연락처</th><th>처리 상태</th></tr></thead><tbody id="rows"></tbody></table>
+        </div>
+        <p class="ex" style="margin:8px 2px 0">줄을 누르면 상세 내용과 전화 걸기 버튼이 열려요.</p>
+        <div class="log"><h3>알림 발송 기록 <span class="ex">(데모에서는 실제로 보내지 않아요)</span></h3><div id="logs"></div></div>
+      </div>
+      <form id="tabEdit" class="edit" hidden>
+        <div class="card2"><h3>의약품 주문 시스템 주소</h3><input id="eOrder" type="url" placeholder="https://"><p class="ex" style="margin:6px 0 0">홈페이지의 '의약품 주문' 버튼이 이 주소를 새 창으로 열어요.</p></div>
+        <div class="card2"><h3>파트너 제약사 (이름 · 공식 홈페이지)</h3><div class="grid" id="ePartners"></div><p class="ex" style="margin:6px 0 0">실제 사이트에서는 로고 이미지도 여기서 올려요. 로고 사용 허락은 귀사에서 확인해 주세요.</p></div>
+        <div class="card2"><h3>연혁</h3><div class="grid" id="eHistory"></div></div>
+        <button class="btn btn-primary" type="submit">저장하고 홈페이지에 반영</button>
+      </form>
     </div>
-    <div class="log"><h3>알림 발송 기록 <span class="ex">(데모에서는 실제로 보내지 않아요)</span></h3><div id="logs"></div></div>
   </div>
 </div>
 
@@ -656,153 +855,222 @@ table.list td{padding:14px;border-bottom:1px solid var(--line);vertical-align:mi
 <section class="how" id="how" hidden><div class="wrap">
   <span class="eyebrow">HOW IT WORKS</span>
   <h2 style="font-size:30px">상담이 누락되지 않는 구조</h2>
-  <p class="lead">홈페이지는 빠르고 저렴하게, 상담 접수는 두 곳에 동시에 남기고, 알림은 담당자 휴대폰으로 바로 보냅니다.</p>
+  <p class="lead">홈페이지는 가볍고 빠르게, 상담은 먼저 저장한 뒤 담당자에게 바로 알립니다.</p>
   <div class="flow">
     <div><em>1</em><b>원장님이 상담 신청</b><p>필수 항목·동의를 확인한 뒤에만 보내져요</p></div>
-    <div><em>2</em><b>DB에 저장</b><p>저장이 끝나야 '접수 완료'를 보여 줘요. 실패하면 다시 보내라고 안내해요</p></div>
-    <div><em>3</em><b>담당자에게 즉시 알림</b><p>카카오 알림톡(실패 시 문자로 자동 대체) + 이메일</p></div>
-    <div><em>4</em><b>관리자에서 처리</b><p>새 접수 → 상담 중 → 완료, 엑셀 받기</p></div>
+    <div><em>2</em><b>DB에 먼저 저장</b><p>저장이 끝나야 '접수 완료'를 보여 줘요. 실패하면 다시 보내라고 안내해요</p></div>
+    <div><em>3</em><b>담당자에게 즉시 알림</b><p>문자 + 이메일 동시 발송. 카카오 알림톡은 채널·문구 승인 후 전환</p></div>
+    <div><em>4</em><b>관리자에서 처리</b><p>새 접수 → 상담 중 → 완료, 엑셀(CSV) 받기, 알림 실패 시 재발송</p></div>
   </div>
-  <table class="cmp">
-    <tr><th></th><th>A안 (추천) 맞춤 제작</th><th>B안 웹빌더(아임웹 등)</th></tr>
-    <tr><th>화면</th><td>시안 그대로 자유롭게 구현, 모바일 최적화</td><td>템플릿 안에서 수정</td></tr>
-    <tr><th>상담 관리</th><td>전용 관리자 화면: 상태 관리, 검색, 엑셀</td><td>빌더 기본 폼 게시판</td></tr>
-    <tr><th>알림</th><td>알림톡·문자·이메일 동시 발송, 실패 기록</td><td>대부분 이메일 알림</td></tr>
-    <tr><th>월 비용</th><td>호스팅 0원~ + 알림 건당 요금(알림톡 약 10원대, 문자 약 20원대)</td><td>빌더 요금제 월 1~3만 원대</td></tr>
-    <tr><th>글 수정</th><td>관리자에서 연혁·파트너 로고·링크 수정</td><td>빌더 편집기로 직접 수정</td></tr>
-  </table>
-  <p class="ex" style="margin-top:10px">알림톡은 회사 명의의 카카오 비즈니스 채널과 문구 심사가 필요해요(보통 며칠 걸려요). 심사 전에는 문자로 먼저 운영해요. 요금은 발송 대행사마다 달라서 계약 전 확인해 드려요.</p>
+  <div class="cmpwrap"><table class="cmp">
+    <tr><th></th><th>A안 맞춤 제작 (추천)</th><th>B안 웹빌더(아임웹 등)</th></tr>
+    <tr><th>화면</th><td>시안 그대로 자유롭게 구현, 모바일 최적화</td><td>빌더 템플릿 기반으로 구성</td></tr>
+    <tr><th>상담 관리</th><td>전용 관리자: 상태 관리, 검색, 엑셀, 상세·전화</td><td>빌더가 지원하는 폼 기능 범위 안에서</td></tr>
+    <tr><th>알림</th><td>문자·이메일(→알림톡) 직접 연동, 실패 기록·재발송</td><td>빌더 기능 + 필요 시 외부 연동 추가</td></tr>
+    <tr><th>운영비</th><td>호스팅은 무료 한도 안에서 0원, 도메인(연 1~2만 원대), 문자·메일 건당 요금</td><td>빌더 요금제 월 이용료 + 도메인</td></tr>
+    <tr><th>내용 수정</th><td>관리자에서 문구·사진·연혁·로고·링크 수정</td><td>빌더 편집기로 직접 수정</td></tr>
+  </table></div>
+  <p class="ex" style="margin-top:10px">어느 쪽이든 같은 금액 안에서 구축과 알림 연동을 맡아요. 모든 계정(도메인·서버·발송 대행사)은 귀사 명의로 만들고, 소스코드 일체를 넘겨 드려요. 문자 발송에는 발신번호 사전 등록이 필요해요.</p>
 </div></section>
 
 <div class="toast" id="toast" hidden></div>
 
 <script>
 (function(){
-  var KEY = 'pharm-demo-v1';
+  var KEY = 'pharm-demo-v3';
   var STATUS = {new:'새 접수', ing:'상담 중', done:'완료'};
   function pad(n){ return String(n).padStart(2, '0'); }
   function stamp(d){ return (d.getMonth()+1) + '/' + d.getDate() + ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes()); }
   function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
-  function mask(p){ return p.replace(/^(\d{3})-?(\d{3,4})-?(\d{4})$/, '$1-****-$3'); }
+  function $(id){ return document.getElementById(id); }
   function seed(){
     var now = Date.now(), h = 36e5;
     return {items:[
-      {id:1, at:now - 2*h, type:['개원'], hospital:'○○정신건강의학과의원', name:'김○○', phone:'010-1234-5678', region:'경기', memo:'내년 3월 개원 예정입니다.', st:'new'},
-      {id:2, at:now - 26*h, type:['납품'], hospital:'△△마음의원', name:'이○○', phone:'010-2345-6789', region:'서울', memo:'', st:'ing'},
-      {id:3, at:now - 74*h, type:['마케팅','납품'], hospital:'□□정신과의원', name:'박○○', phone:'010-3456-7890', region:'인천', memo:'블로그 운영 문의', st:'done'}
-    ], logs:[]};
+      {id:1, at:now - 2*h, type:['개원'], hospital:'○○정신건강의학과의원', name:'김○○', phone:'010-1234-5678', region:'경기', memo:'내년 3월 개원 예정입니다. 초도 의약품 구성도 같이 상담받고 싶어요.', st:'new'},
+      {id:2, at:now - 26*h, type:['납품'], hospital:'△△마음의원', name:'이○○', phone:'032-123-4567', region:'인천', memo:'', st:'ing'},
+      {id:3, at:now - 74*h, type:['마케팅','납품'], hospital:'□□정신과의원', name:'박○○', phone:'010-3456-7890', region:'서울', memo:'블로그 운영 문의', st:'done'}
+    ], logs:[], content:{
+      order:'https://example.com/order',
+      partners:[['제약사 A','https://example.com'],['제약사 B','https://example.com'],['제약사 C','https://example.com'],['제약사 D','https://example.com'],['제약사 E','https://example.com'],['제약사 F','https://example.com']],
+      history:[['2018','회사 설립'],['2021','KGSP 적격 물류센터'],['2024','개원·마케팅 컨설팅'],['2026','공식 홈페이지 오픈']]
+    }};
   }
-  var db = (function(){ try { var s = JSON.parse(localStorage.getItem(KEY)); if (s && s.items) return s; } catch(e){} return seed(); })();
-  function save(){ try { localStorage.setItem(KEY, JSON.stringify(db)); return true; } catch(e){ return false; } }
-  function toast(html, ms){ var t = document.getElementById('toast'); t.innerHTML = html; t.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(function(){ t.hidden = true; }, ms || 3200); }
+  var db = (function(){ try { var s = JSON.parse(localStorage.getItem(KEY)); if (s && s.items && s.content) return s; } catch(e){} return seed(); })();
+  var mem = false;
+  function save(){ try { localStorage.setItem(KEY, JSON.stringify(db)); return true; } catch(e){ mem = true; return true; } }
+  function toast(html, ms){ var t = $('toast'); t.innerHTML = html; t.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(function(){ t.hidden = true; }, ms || 3200); }
+  function closeAll(){ document.querySelectorAll('.modal,.drawer').forEach(function(m){ m.hidden = true; }); $('sheet').hidden = true; }
 
-  // 화면 전환
-  function go(v){
-    document.getElementById('site').hidden = v !== 'site';
-    document.getElementById('admin').hidden = v !== 'admin';
-    document.getElementById('how').hidden = v !== 'how';
+  // ----- 화면 전환 -----
+  var view = 'site';
+  function go(v, push){
+    view = v;
+    $('site').hidden = v !== 'site'; $('admin').hidden = v !== 'admin'; $('how').hidden = v !== 'how';
     document.querySelectorAll('.demobar [data-go]').forEach(function(b){ b.classList.toggle('on', b.dataset.go === v); });
-    document.querySelectorAll('.modal').forEach(function(m){ m.hidden = true; });
-    if (v === 'admin') renderAdmin();
+    closeAll();
+    if (v === 'admin') showAdmin();
     if (v !== 'site') window.scrollTo(0, 0);
-    try { history.replaceState(null, '', v === 'site' ? location.pathname : '#' + v); } catch(e){}
+    slider.run(v === 'site');
+    var h = v === 'site' ? location.pathname + location.search : '#' + v;
+    try { if (push) history.pushState({v:v}, '', h); else history.replaceState({v:v}, '', h); } catch(e){}
   }
-  document.addEventListener('click', function(e){
-    var g = e.target.closest('[data-go]'); if (g){ go(g.dataset.go); return; }
-    if (e.target.closest('[data-order]')){ e.preventDefault(); toast('실제 사이트에서는 기존 의약품 주문 시스템이 새 창으로 열려요'); return; }
-    if (e.target.closest('[data-close]') || e.target.classList.contains('modal')){ document.querySelectorAll('.modal').forEach(function(m){ m.hidden = true; }); }
-    var a = e.target.closest('#sheet a'); if (a || e.target.id === 'sheet') document.getElementById('sheet').hidden = true;
-  });
-  document.getElementById('burger').onclick = function(){ document.getElementById('sheet').hidden = false; };
-  document.getElementById('callBtn').onclick = function(e){ e.preventDefault(); toast('실제 사이트에서는 누르면 대표 번호로 바로 전화가 걸려요'); };
-  document.getElementById('privacyLink').onclick = function(e){ e.preventDefault(); document.getElementById('terms').hidden = false; };
-  document.getElementById('viewTerms').onclick = function(){ document.getElementById('terms').hidden = false; };
-  document.addEventListener('keydown', function(e){ if (e.key === 'Escape'){ document.querySelectorAll('.modal').forEach(function(m){ m.hidden = true; }); document.getElementById('sheet').hidden = true; } });
+  window.addEventListener('popstate', function(){ var h = location.hash.slice(1); go(h === 'admin' || h === 'how' ? h : 'site'); });
 
-  // 헤더 배경
-  var hd = document.getElementById('hd');
+  document.addEventListener('click', function(e){
+    var g = e.target.closest('[data-go]'); if (g){ go(g.dataset.go, true); return; }
+    var tt = e.target.closest('[data-toast]'); if (tt){ e.preventDefault(); toast(tt.dataset.toast === '전화' ? '실제 사이트에서는 대표 번호로 바로 전화가 걸려요' : '실제 사이트에서는 카카오맵 길찾기가 열려요'); return; }
+    var o = e.target.closest('[data-order]'); if (o){ e.preventDefault(); var u = db.content.order; window.open(/^https?:\/\//.test(u) && u.indexOf('example.com') < 0 ? u : 'order.html', '_blank', 'noopener'); return; }
+    if (e.target.closest('[data-close]') || e.target.classList.contains('modal') || e.target.classList.contains('drawer')){ closeAll(); }
+    var a = e.target.closest('#sheet a'); if (a || e.target.id === 'sheet') $('sheet').hidden = true;
+  });
+  $('burger').onclick = function(){ $('sheet').hidden = false; };
+  $('callBtn').onclick = function(e){ e.preventDefault(); toast('실제 사이트에서는 누르면 대표 번호로 바로 전화가 걸려요'); };
+  $('privacyLink').onclick = function(e){ e.preventDefault(); $('privacy').hidden = false; };
+  $('viewTerms').onclick = function(){ $('terms').hidden = false; };
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeAll(); });
+
+  // ----- 헤더 -----
+  var hd = $('hd');
   function onScroll(){ hd.classList.toggle('solid', window.scrollY > 40); }
   window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
 
-  // 파트너 로고 자리
-  var P = ['제약사 A','제약사 B','제약사 C','제약사 D','제약사 E','제약사 F'];
-  document.getElementById('logos').innerHTML = P.map(function(p){ return '<a href="#" data-logo>' + p + '<span class="ex" style="display:block;font-weight:500">로고 자리</span></a>'; }).join('');
-  document.getElementById('logos').onclick = function(e){ if (e.target.closest('[data-logo]')){ e.preventDefault(); toast('실제 사이트에서는 제약사 공식 홈페이지가 새 창으로 열려요'); } };
+  // ----- 메인 슬라이드 -----
+  var slider = (function(){
+    var imgs = document.querySelectorAll('.hv>img'), dots = document.querySelectorAll('#dots button'), sl = $('slogan');
+    var words = ['Steady Care','Open With Us','Safe Delivery'], k = 0, t = null, reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function show(n){ k = n; imgs.forEach(function(im, i){ im.classList.toggle('on', i === n); }); dots.forEach(function(d, i){ d.classList.toggle('on', i === n); d.setAttribute('aria-pressed', String(i === n)); }); sl.style.opacity = 0; setTimeout(function(){ sl.textContent = words[n]; sl.style.opacity = 1; }, 250); }
+    function run(on){ clearInterval(t); t = null; if (on && !reduce && !document.hidden) t = setInterval(function(){ show((k + 1) % imgs.length); }, 6000); }
+    dots.forEach(function(d, i){ d.onclick = function(){ show(i); run(view === 'site'); }; });
+    document.addEventListener('visibilitychange', function(){ run(view === 'site'); });
+    return {run:run};
+  })();
 
-  // 상담 폼
-  var phone = document.getElementById('phone');
-  phone.addEventListener('input', function(){ var d = phone.value.replace(/\D/g, '').slice(0, 11); phone.value = d.length < 4 ? d : d.length < 8 ? d.slice(0,3) + '-' + d.slice(3) : d.slice(0,3) + '-' + d.slice(3, d.length - 4) + '-' + d.slice(-4); });
+  // ----- 등장 효과 · 숫자 -----
+  function countUp(el){ var to = parseFloat(el.dataset.to), dec = +(el.dataset.dec || 0), t0 = null; function step(ts){ if (!t0) t0 = ts; var p = Math.min(1, (ts - t0) / 1400), v = to * (1 - Math.pow(1 - p, 3)); el.textContent = v.toFixed(dec); if (p < 1) requestAnimationFrame(step); } requestAnimationFrame(step); }
+  if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+    var io = new IntersectionObserver(function(es){ es.forEach(function(en){ if (!en.isIntersecting) return; en.target.classList.add('in'); en.target.querySelectorAll('.count').forEach(function(c){ if (!c.dataset.done){ c.dataset.done = 1; countUp(c); } }); io.unobserve(en.target); }); }, {threshold:.15});
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+    document.querySelectorAll('.count').forEach(function(c){ c.textContent = (+c.dataset.to).toFixed(+(c.dataset.dec || 0)); });
+  }
+
+  // ----- 홈페이지 내용 (관리자에서 수정) -----
+  function okUrl(u){ return /^https?:\/\//.test(u) ? u : '#'; }
+  function renderContent(){
+    var c = db.content;
+    $('logos').innerHTML = c.partners.map(function(p){ return '<a href="' + esc(okUrl(p[1])) + '" target="_blank" rel="noopener">' + esc(p[0]) + '<span class="ex" style="display:block;font-weight:500">로고 자리</span></a>'; }).join('');
+    var tl = document.querySelectorAll('#history .tl2 > div');
+    c.history.forEach(function(hh, i){ if (tl[i]){ tl[i].querySelector('b').textContent = hh[0]; tl[i].querySelector('strong').textContent = hh[1]; } });
+  }
+  renderContent();
+
+  // ----- 상담 폼 -----
+  var phone = $('phone');
+  function fmtPhone(d){ d = d.replace(/\D/g, '').slice(0, 11); if (/^02/.test(d)) return d.length < 3 ? d : d.length < 6 ? d.slice(0,2) + '-' + d.slice(2) : d.slice(0,2) + '-' + d.slice(2, d.length - 4) + '-' + d.slice(-4); return d.length < 4 ? d : d.length < 8 ? d.slice(0,3) + '-' + d.slice(3) : d.slice(0,3) + '-' + d.slice(3, d.length - 4) + '-' + d.slice(-4); }
+  phone.addEventListener('input', function(){ phone.value = fmtPhone(phone.value); });
+  function validPhone(p){ var d = p.replace(/\D/g, ''); return /^01[016789]\d{7,8}$/.test(d) || /^02\d{7,8}$/.test(d) || /^0[3-6][1-5]\d{7,8}$/.test(d) || /^0[78]0\d{7,8}$/.test(d); }
   function setErr(key, on){ var f = document.querySelector('[data-f="' + key + '"]'); if (f) f.classList.toggle('err', on); }
-  ['hospital','name','phone','region'].forEach(function(k){ var el = document.getElementById(k); el.addEventListener('input', function(){ setErr(k, false); }); el.addEventListener('change', function(){ setErr(k, false); }); });
-  document.getElementById('ctype').addEventListener('change', function(){ document.getElementById('typeMsg').hidden = true; });
-  document.getElementById('agree').addEventListener('change', function(){ document.getElementById('agreeRow').classList.remove('err'); });
+  ['hospital','name','phone','region'].forEach(function(k){ var el = $(k); el.addEventListener('input', function(){ setErr(k, false); }); el.addEventListener('change', function(){ setErr(k, false); }); });
+  $('ctype').addEventListener('change', function(){ $('typeMsg').hidden = true; });
+  $('agree').addEventListener('change', function(){ $('agreeRow').classList.remove('err'); });
   var sending = false;
-  document.getElementById('cform').onsubmit = function(e){
+  $('cform').onsubmit = function(e){
     e.preventDefault(); if (sending) return;
-    var v = function(id){ return document.getElementById(id).value.trim(); };
+    var v = function(id){ return $(id).value.trim(); };
     var types = [].slice.call(document.querySelectorAll('#ctype input:checked')).map(function(i){ return i.value; });
     var bad = [];
-    if (!types.length){ document.getElementById('typeMsg').hidden = false; bad.push(document.getElementById('ctype')); }
-    if (!v('hospital')){ setErr('hospital', true); bad.push(document.getElementById('hospital')); }
-    if (!v('name')){ setErr('name', true); bad.push(document.getElementById('name')); }
-    if (!/^01[016789]-?\d{3,4}-?\d{4}$/.test(v('phone'))){ setErr('phone', true); bad.push(phone); }
-    if (!v('region')){ setErr('region', true); bad.push(document.getElementById('region')); }
-    if (!document.getElementById('agree').checked){ document.getElementById('agreeRow').classList.add('err'); bad.push(document.getElementById('agree')); }
-    if (bad.length){ bad[0].scrollIntoView({block:'center', behavior:'smooth'}); if (bad[0].focus) bad[0].focus({preventScroll:true}); toast('빨간 칸을 확인해 주세요', 2000); return; }
+    if (!types.length){ $('typeMsg').hidden = false; bad.push(document.querySelector('#ctype input')); }
+    if (!v('hospital')){ setErr('hospital', true); bad.push($('hospital')); }
+    if (!v('name')){ setErr('name', true); bad.push($('name')); }
+    if (!validPhone(v('phone'))){ setErr('phone', true); bad.push(phone); }
+    if (!v('region')){ setErr('region', true); bad.push($('region')); }
+    if (!$('agree').checked){ $('agreeRow').classList.add('err'); bad.push($('agree')); }
+    if (bad.length){ bad[0].scrollIntoView({block:'center', behavior:'smooth'}); bad[0].focus({preventScroll:true}); toast('빨간 칸을 확인해 주세요', 2000); return; }
     sending = true;
     var btn = this.querySelector('[type=submit]'); btn.disabled = true; btn.textContent = '보내는 중…';
-    var item = {id:Date.now(), at:Date.now(), type:types, hospital:v('hospital'), name:v('name'), phone:v('phone'), region:v('region'), memo:v('memo'), st:'new'};
+    var item = {id:Date.now(), at:Date.now(), type:types, hospital:v('hospital'), name:v('name'), phone:fmtPhone(v('phone')), region:v('region'), memo:v('memo'), st:'new'};
     setTimeout(function(){
       db.items.unshift(item);
       var t = stamp(new Date());
-      db.logs.unshift({at:t, ch:'알림톡', text:'[새 상담] ' + item.hospital + ' / ' + item.name + ' / ' + types.join('·')});
       db.logs.unshift({at:t, ch:'이메일', text:'담당자 메일로 상담 내용 전체 전송'});
-      if (!save()){ db.items.shift(); db.logs.splice(0, 2); toast('저장하지 못했어요. 다시 시도해 주세요'); }
-      else {
-        document.getElementById('cform').reset();
-        document.getElementById('doneModal').hidden = false;
-        setTimeout(function(){ toast('<i>톡</i><span><b>담당자 휴대폰 알림 (예시)</b><br>[새 상담] ' + esc(item.hospital) + ' · ' + esc(item.region) + ' · ' + esc(types.join('·')) + '</span>', 4200); }, 600);
-      }
+      db.logs.unshift({at:t, ch:'문자', text:'[새 상담] ' + item.hospital + ' / ' + item.region + ' / ' + types.join('·')});
+      save();
+      $('cform').reset();
+      document.querySelectorAll('.f.err').forEach(function(f){ f.classList.remove('err'); });
+      $('doneModal').hidden = false;
+      setTimeout(function(){ toast('<i>문자</i><span><b>담당자 휴대폰 알림 (예시)</b><br>[새 상담] ' + esc(item.hospital) + ' · ' + esc(item.region) + ' · ' + esc(types.join('·')) + '</span>', 4200); }, 600);
       btn.disabled = false; btn.textContent = '상담 신청하기'; sending = false;
     }, 700);
   };
 
-  // 관리자
-  var fst = '';
-  function renderAdmin(){
-    var q = document.getElementById('q').value.trim();
-    var c = {new:0, ing:0, done:0};
-    db.items.forEach(function(i){ c[i.st]++; });
-    document.getElementById('kNew').textContent = c.new; document.getElementById('kIng').textContent = c.ing; document.getElementById('kDone').textContent = c.done; document.getElementById('kAll').textContent = db.items.length;
-    var list = db.items.filter(function(i){ return (!fst || i.st === fst) && (!q || (i.hospital + i.name).indexOf(q) >= 0); });
-    document.getElementById('rows').innerHTML = list.length ? list.map(function(i){
-      return '<tr><td>' + stamp(new Date(i.at)) + '</td><td><b>' + esc(i.hospital) + '</b><div class="ex">' + esc(i.name) + (i.memo ? ' · ' + esc(i.memo.slice(0, 24)) : '') + '</div></td><td class="hm">' + esc(i.type.join('·')) + '</td><td class="hm">' + esc(i.region) + '</td><td class="hm">' + esc(i.phone) + '</td><td><select class="st ' + i.st + '" data-id="' + i.id + '">' + Object.keys(STATUS).map(function(k){ return '<option value="' + k + '"' + (k === i.st ? ' selected' : '') + '>' + STATUS[k] + '</option>'; }).join('') + '</select></td></tr>';
-    }).join('') : '<tr><td colspan="6" class="empty">해당하는 상담이 없어요</td></tr>';
-    document.getElementById('logs').innerHTML = db.logs.length ? db.logs.slice(0, 8).map(function(l){ return '<div><em>' + esc(l.at) + '</em><em>' + esc(l.ch) + '</em><span>' + esc(l.text) + '</span></div>'; }).join('') : '<div>아직 발송 기록이 없어요. 홈페이지에서 상담을 신청해 보세요.</div>';
-  }
-  document.getElementById('rows').addEventListener('change', function(e){
-    var s = e.target.closest('select[data-id]'); if (!s) return;
-    var it = db.items.filter(function(i){ return String(i.id) === s.dataset.id; })[0]; if (!it) return;
-    it.st = s.value; save(); renderAdmin(); toast(esc(it.hospital) + ' → ' + STATUS[it.st], 1800);
-  });
-  document.getElementById('q').oninput = renderAdmin;
-  document.querySelectorAll('.fchip').forEach(function(b){ b.onclick = function(){ fst = b.dataset.s; document.querySelectorAll('.fchip').forEach(function(x){ x.classList.toggle('on', x === b); }); renderAdmin(); }; });
-  document.getElementById('csv').onclick = function(){
-    var rows = [['접수 시각','병원명','성함','연락처','지역','분야','문의 내용','처리 상태']].concat(db.items.map(function(i){ return [new Date(i.at).toLocaleString('ko-KR'), i.hospital, i.name, i.phone, i.region, i.type.join('·'), i.memo, STATUS[i.st]]; }));
-    var csv = '﻿' + rows.map(function(r){ return r.map(function(x){ x = String(x == null ? '' : x); if (/^[=+\-@]/.test(x)) x = "'" + x; return '"' + x.replace(/"/g, '""') + '"'; }).join(','); }).join('\r\n');
-    var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], {type:'text/csv;charset=utf-8'})); a.download = '상담접수_예시.csv'; document.body.appendChild(a); a.click(); a.remove();
-    toast('엑셀에서 열 수 있는 파일로 받았어요', 1800);
+  // 메인 빠른 상담 → 아래 폼으로 이어서
+  $('qform').onsubmit = function(e){
+    e.preventDefault();
+    var t = $('qType').value, r = $('qRegion').value, hsp = $('qHospital').value.trim();
+    if (t){ document.querySelectorAll('#ctype input').forEach(function(i){ i.checked = i.value === t; }); $('typeMsg').hidden = true; }
+    if (r){ $('region').value = r; setErr('region', false); }
+    if (hsp){ $('hospital').value = hsp; setErr('hospital', false); }
+    document.getElementById('consult').scrollIntoView({behavior:'smooth'});
+    setTimeout(function(){ (hsp ? $('name') : $('hospital')).focus({preventScroll:true}); }, 700);
+    toast('입력하신 내용을 상담 신청서에 옮겨 놨어요. 나머지만 채워 주세요', 2600);
   };
 
-  // 메인 슬라이드
-  (function(){
-    var imgs = document.querySelectorAll('.hx .card>img'), dots = document.querySelectorAll('#dots button'), sl = document.getElementById('slogan');
-    var words = ['Steady<br>Care','Open<br>With Us','Safe<br>Delivery'], k = 0, t;
-    function show(n){ k = n; imgs.forEach(function(im, i){ im.classList.toggle('on', i === n); }); dots.forEach(function(d, i){ d.classList.toggle('on', i === n); }); sl.style.opacity = 0; setTimeout(function(){ sl.innerHTML = words[n]; sl.style.opacity = 1; }, 250); }
-    function auto(){ clearInterval(t); t = setInterval(function(){ show((k + 1) % imgs.length); }, 6000); }
-    dots.forEach(function(d, i){ d.onclick = function(){ show(i); auto(); }; });
-    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) auto();
-  })();
+  // ----- 관리자 -----
+  var authed = false, fst = '', cur = null;
+  function showAdmin(){ $('login').hidden = authed; $('adminBody').hidden = !authed; $('logout').hidden = !authed; $('who').textContent = authed ? '담당자 manager@example.com' : ''; if (authed) renderAdmin(); }
+  $('login').onsubmit = function(e){ e.preventDefault(); authed = true; showAdmin(); };
+  $('logout').onclick = function(){ authed = false; showAdmin(); };
+  document.querySelectorAll('[data-tab]').forEach(function(b){ b.onclick = function(){ document.querySelectorAll('[data-tab]').forEach(function(x){ x.classList.toggle('on', x === b); }); $('tabList').hidden = b.dataset.tab !== 'list'; $('tabEdit').hidden = b.dataset.tab !== 'edit'; if (b.dataset.tab === 'edit') fillEdit(); }; });
+  function opts(sel){ return Object.keys(STATUS).map(function(k){ return '<option value="' + k + '"' + (k === sel ? ' selected' : '') + '>' + STATUS[k] + '</option>'; }).join(''); }
+  function renderAdmin(){
+    var q = $('q').value.trim(), c = {new:0, ing:0, done:0};
+    db.items.forEach(function(i){ c[i.st]++; });
+    $('kNew').textContent = c.new; $('kIng').textContent = c.ing; $('kDone').textContent = c.done; $('kAll').textContent = db.items.length;
+    var list = db.items.filter(function(i){ return (!fst || i.st === fst) && (!q || (i.hospital + i.name).indexOf(q) >= 0); });
+    $('rows').innerHTML = list.length ? list.map(function(i){
+      return '<tr data-row="' + i.id + '"><td>' + stamp(new Date(i.at)) + '</td><td><b>' + esc(i.hospital) + '</b><div class="ex">' + esc(i.name) + '</div></td><td class="hm">' + esc(i.type.join('·')) + '</td><td class="hm">' + esc(i.region) + '</td><td class="hm">' + esc(i.phone) + '</td><td><select class="st ' + i.st + '" data-id="' + i.id + '" aria-label="처리 상태">' + opts(i.st) + '</select></td></tr>';
+    }).join('') : '<tr><td colspan="6" class="empty">해당하는 상담이 없어요</td></tr>';
+    $('logs').innerHTML = db.logs.length ? db.logs.slice(0, 8).map(function(l){ return '<div><em>' + esc(l.at) + '</em><em>' + esc(l.ch) + '</em><span>' + esc(l.text) + '</span></div>'; }).join('') : '<div>아직 발송 기록이 없어요. 홈페이지에서 상담을 신청해 보세요.</div>';
+  }
+  function setStatus(id, st){ var it = db.items.filter(function(i){ return String(i.id) === String(id); })[0]; if (!it) return; it.st = st; save(); renderAdmin(); toast(esc(it.hospital) + ' → ' + STATUS[st], 1800); }
+  $('rows').addEventListener('change', function(e){ var s = e.target.closest('select[data-id]'); if (s) setStatus(s.dataset.id, s.value); });
+  $('rows').addEventListener('click', function(e){
+    if (e.target.closest('select')) return;
+    var r = e.target.closest('tr[data-row]'); if (!r) return;
+    var it = db.items.filter(function(i){ return String(i.id) === r.dataset.row; })[0]; if (!it) return;
+    cur = it.id;
+    $('dTitle').textContent = it.hospital;
+    $('dBody').innerHTML = [['접수', new Date(it.at).toLocaleString('ko-KR')], ['성함', it.name], ['연락처', it.phone], ['지역', it.region], ['분야', it.type.join('·')], ['문의 내용', it.memo || '없음']].map(function(x){ return '<dt>' + x[0] + '</dt><dd>' + esc(x[1]) + '</dd>'; }).join('');
+    $('dCall').href = 'tel:' + it.phone.replace(/\D/g, '');
+    $('dStatus').innerHTML = opts(it.st); $('dStatus').className = 'st ' + it.st;
+    $('drawer').hidden = false;
+  });
+  $('dStatus').onchange = function(){ setStatus(cur, this.value); this.className = 'st ' + this.value; };
+  $('q').oninput = renderAdmin;
+  document.querySelectorAll('.fchip').forEach(function(b){ b.onclick = function(){ fst = b.dataset.s; document.querySelectorAll('.fchip').forEach(function(x){ x.classList.toggle('on', x === b); }); renderAdmin(); }; });
+  $('csv').onclick = function(){
+    var rows = [['접수 시각','병원명','성함','연락처','지역','분야','문의 내용','처리 상태']].concat(db.items.map(function(i){ return [new Date(i.at).toLocaleString('ko-KR'), i.hospital, i.name, i.phone, i.region, i.type.join('·'), i.memo, STATUS[i.st]]; }));
+    var csv = '﻿' + rows.map(function(r){ return r.map(function(x){ x = String(x == null ? '' : x); if (/^[=+\-@\t\r]/.test(x)) x = "'" + x; return '"' + x.replace(/"/g, '""') + '"'; }).join(','); }).join('\r\n');
+    var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], {type:'text/csv;charset=utf-8'})); a.download = '상담접수_예시.csv'; document.body.appendChild(a); a.click(); a.remove();
+    toast('엑셀에서 열리는 파일(CSV)로 받았어요', 1800);
+  };
+  function fillEdit(){
+    var c = db.content;
+    $('eOrder').value = c.order;
+    $('ePartners').innerHTML = c.partners.map(function(p, i){ return '<input data-p="' + i + '-0" value="' + esc(p[0]) + '" aria-label="제약사 ' + (i+1) + ' 이름"><input data-p="' + i + '-1" value="' + esc(p[1]) + '" aria-label="제약사 ' + (i+1) + ' 주소">'; }).join('');
+    $('eHistory').innerHTML = c.history.map(function(hh, i){ return '<input data-h="' + i + '-0" value="' + esc(hh[0]) + '" aria-label="연도"><input data-h="' + i + '-1" value="' + esc(hh[1]) + '" aria-label="내용">'; }).join('');
+  }
+  $('tabEdit').onsubmit = function(e){
+    e.preventDefault();
+    var c = db.content;
+    c.order = $('eOrder').value.trim() || c.order;
+    document.querySelectorAll('[data-p]').forEach(function(i){ var k = i.dataset.p.split('-'); c.partners[+k[0]][+k[1]] = i.value.trim(); });
+    document.querySelectorAll('[data-h]').forEach(function(i){ var k = i.dataset.h.split('-'); c.history[+k[0]][+k[1]] = i.value.trim(); });
+    save(); renderContent();
+    toast('저장했어요. 홈페이지에 바로 반영됐어요', 2000);
+  };
+
   var h = location.hash.slice(1);
   go(h === 'admin' || h === 'how' ? h : 'site');
 })();
