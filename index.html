@@ -1,0 +1,616 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>의약품 유통 기업 홈페이지 데모</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{
+  --bg:#fff; --soft:#f5f8fc; --line:#e4e9f0; --ink:#121a26; --ink-2:#4a5568; --ink-3:#718096;
+  --brand:#1f5fbf; --brand-2:#174a96; --brand-soft:#eaf2fd; --mint:#14a38b; --mint-soft:#e6f6f2; --warn:#b7791f; --warn-soft:#fdf4e3; --red:#c53030; --red-soft:#fdecec;
+  --r:16px; --r-lg:24px; --shadow:0 2px 10px rgba(18,26,38,.06); --shadow-2:0 12px 32px rgba(18,26,38,.12);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{background:var(--bg);color:var(--ink);font-family:Pretendard,-apple-system,"Apple SD Gothic Neo",sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+svg{flex:none;stroke-linecap:round;stroke-linejoin:round}
+[hidden]{display:none!important}
+.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+h1,h2,h3{letter-spacing:-.025em;margin:0}
+.eyebrow{display:inline-block;font-size:13px;font-weight:800;color:var(--brand);letter-spacing:.08em;margin-bottom:10px}
+.sec{padding:88px 0}
+.sec.soft{background:var(--soft)}
+.sec h2{font-size:clamp(26px,3.4vw,36px);line-height:1.3;margin-bottom:12px}
+.lead{color:var(--ink-2);font-size:17px;max-width:640px;margin:0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:52px;padding:0 24px;border-radius:999px;border:1px solid transparent;font-weight:800;font-size:16px;white-space:nowrap}
+.btn-primary{background:var(--brand);color:#fff}
+.btn-primary:hover{background:var(--brand-2)}
+.btn-white{background:#fff;color:var(--brand)}
+.btn-line{background:#fff;border-color:var(--line);color:var(--ink)}
+.btn-line:hover{border-color:#c9d3e0}
+.btn-sm{height:40px;padding:0 16px;font-size:14px}
+.ex{font-size:12px;color:var(--ink-3);font-weight:500}
+
+/* 데모 띠 */
+.demobar{position:fixed;left:0;right:0;bottom:0;z-index:90;background:#1a202c;color:#cbd5e0;font-size:13px;display:flex;align-items:center;gap:6px;padding:8px 12px calc(8px + env(safe-area-inset-bottom));overflow-x:auto;scrollbar-width:none}
+.demobar b{background:#f6d365;color:#111;border-radius:4px;padding:1px 7px;font-size:12px;flex:none}
+.demobar .msg{white-space:nowrap}
+.demobar .sp{flex:1}
+.demobar button{flex:none;border:0;border-radius:8px;padding:7px 12px;font-size:13px;font-weight:700;background:#2d3748;color:#fff;white-space:nowrap}
+.demobar button.on{background:#fff;color:#111}
+
+/* 헤더 */
+header{position:fixed;top:0;left:0;right:0;z-index:50;transition:background .2s,box-shadow .2s}
+header .in{max-width:1160px;margin:0 auto;padding:0 20px;height:72px;display:flex;align-items:center;gap:28px}
+header.solid{background:rgba(255,255,255,.96);backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--line)}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:19px;color:#fff;white-space:nowrap}
+header.solid .logo{color:var(--ink)}
+.logo i{width:34px;height:34px;border-radius:11px;background:#fff;display:grid;place-items:center;color:var(--brand)}
+header.solid .logo i{background:var(--brand);color:#fff}
+.logo small{font-size:12px;font-weight:600;opacity:.75}
+nav.gnb{display:flex;gap:4px;margin-left:auto}
+nav.gnb a{padding:8px 14px;border-radius:999px;font-weight:700;font-size:15px;color:rgba(255,255,255,.9)}
+header.solid nav.gnb a{color:var(--ink-2)}
+nav.gnb a:hover{background:rgba(255,255,255,.15)}
+header.solid nav.gnb a:hover{background:var(--soft)}
+.hcta{margin-left:8px}
+.burger{display:none;margin-left:auto;width:44px;height:44px;border-radius:12px;border:0;background:rgba(255,255,255,.18);color:#fff;place-items:center}
+header.solid .burger{background:var(--soft);color:var(--ink)}
+
+/* 히어로 */
+.hero{position:relative;min-height:640px;display:flex;align-items:center;color:#fff;overflow:hidden;background:linear-gradient(160deg,#0f3b80 0%,#1f5fbf 45%,#3b8fe0 100%)}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 80% 20%,rgba(255,255,255,.22),transparent 55%),radial-gradient(ellipse at 10% 90%,rgba(20,163,139,.35),transparent 50%)}
+.hero .art{position:absolute;right:-60px;bottom:-40px;width:560px;max-width:60vw;opacity:.95}
+.hero .wrap{position:relative;width:100%;padding-top:72px}
+.hero .tag{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:6px 14px;font-size:14px;font-weight:700;margin-bottom:20px}
+.hero h1{font-size:clamp(34px,5.2vw,56px);line-height:1.2;margin-bottom:18px}
+.hero p{font-size:clamp(16px,1.8vw,19px);opacity:.9;max-width:560px;margin:0 0 30px}
+.hero .ctas{display:flex;gap:10px;flex-wrap:wrap}
+.quick{position:relative;z-index:2;margin-top:-56px}
+.quick .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.quick a{background:#fff;border-radius:var(--r);box-shadow:var(--shadow-2);padding:20px;display:flex;align-items:center;gap:14px;font-weight:800;transition:transform .15s}
+.quick a:hover{transform:translateY(-2px)}
+.quick a i{width:48px;height:48px;border-radius:50%;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center}
+.quick a span small{display:block;font-weight:500;font-size:13px;color:var(--ink-3)}
+
+/* 회사 소개 */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.nums{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px}
+.nums div{background:var(--soft);border-radius:var(--r);padding:18px}
+.nums b{display:block;font-size:28px;color:var(--brand);letter-spacing:-.02em}
+.nums span{font-size:14px;color:var(--ink-3)}
+.timeline{list-style:none;margin:0;padding:0;position:relative}
+.timeline::before{content:"";position:absolute;left:58px;top:8px;bottom:8px;width:2px;background:var(--line)}
+.timeline li{display:grid;grid-template-columns:72px 1fr;gap:20px;padding:12px 0;position:relative}
+.timeline li::before{content:"";position:absolute;left:52px;top:20px;width:14px;height:14px;border-radius:50%;background:#fff;border:3px solid var(--brand)}
+.timeline b{color:var(--brand);font-size:18px}
+.timeline p{margin:0;color:var(--ink-2)}
+.timeline strong{display:block;color:var(--ink)}
+
+/* 사업 분야 */
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:36px}
+.biz{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:28px;box-shadow:var(--shadow)}
+.biz i{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;margin-bottom:18px}
+.biz h3{font-size:21px;margin-bottom:8px}
+.biz p{color:var(--ink-2);margin:0 0 14px}
+.biz ul{margin:0;padding:0;list-style:none;color:var(--ink-2);font-size:15px}
+.biz li{display:flex;gap:8px;padding:4px 0}
+.biz li svg{color:var(--mint);margin-top:4px}
+
+/* 물류 경쟁력 */
+.logi{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center}
+.logi .panel{background:linear-gradient(160deg,#0f3b80,#1f5fbf);color:#fff;border-radius:var(--r-lg);padding:36px}
+.logi .panel h3{font-size:24px;margin-bottom:6px}
+.logi .panel p{opacity:.85;margin:0 0 20px}
+.chk{display:grid;gap:10px}
+.chk div{display:flex;gap:12px;background:rgba(255,255,255,.1);border-radius:14px;padding:14px 16px}
+.chk b{display:block}
+.chk span{font-size:14px;opacity:.85}
+.steps4{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.steps4 div{border:1px solid var(--line);border-radius:var(--r);padding:20px;background:#fff}
+.steps4 em{font-style:normal;font-weight:900;color:var(--brand);font-size:13px}
+.steps4 b{display:block;font-size:17px;margin:4px 0}
+.steps4 p{margin:0;color:var(--ink-2);font-size:14px}
+
+/* 파트너·링크 */
+.logos{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-top:32px}
+.logos a{height:84px;border:1px solid var(--line);border-radius:var(--r);display:grid;place-items:center;font-weight:800;color:var(--ink-3);background:#fff;font-size:15px;text-align:center;padding:8px;transition:border-color .15s}
+.logos a:hover{border-color:var(--brand);color:var(--brand)}
+.links{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:20px}
+.links a{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;background:#fff;font-weight:800}
+.links a i{width:40px;height:40px;border-radius:50%;background:var(--mint-soft);color:var(--mint);display:grid;place-items:center}
+.links a small{display:block;font-weight:500;font-size:12px;color:var(--ink-3)}
+.links a .arr{margin-left:auto;color:var(--ink-3)}
+.order{margin-top:28px;display:flex;align-items:center;justify-content:space-between;gap:16px;background:var(--brand-soft);border-radius:var(--r-lg);padding:26px 30px;flex-wrap:wrap}
+.order h3{font-size:20px}
+.order p{margin:4px 0 0;color:var(--ink-2)}
+
+/* 상담 */
+.consult{display:grid;grid-template-columns:.9fr 1.1fr;gap:40px;align-items:start}
+.why{display:grid;gap:12px;margin-top:24px}
+.why div{display:flex;gap:14px;align-items:flex-start}
+.why i{width:44px;height:44px;border-radius:50%;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center}
+.why b{display:block}
+.why span{color:var(--ink-2);font-size:15px}
+.form{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:30px;box-shadow:var(--shadow-2)}
+.form h3{font-size:22px;margin-bottom:4px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.f{display:flex;flex-direction:column;gap:6px;margin-top:14px}
+.f label{font-size:14px;font-weight:800;color:var(--ink-2)}
+.f label em{color:var(--red);font-style:normal}
+.f input,.f select,.f textarea{height:50px;border:1px solid #cfd8e3;border-radius:12px;padding:0 14px;background:#fff;font-size:16px;outline:0;width:100%}
+.f textarea{height:110px;padding:12px 14px;resize:vertical}
+.f input:focus,.f select:focus,.f textarea:focus{border-color:var(--brand);box-shadow:0 0 0 3px rgba(31,95,191,.15)}
+.f.err input,.f.err select{border-color:var(--red);box-shadow:0 0 0 3px rgba(197,48,48,.1)}
+.f .msg{font-size:13px;color:var(--red);display:none}
+.f.err .msg{display:block}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips label{display:inline-flex;align-items:center;gap:6px;border:1px solid #cfd8e3;border-radius:999px;padding:9px 14px;font-weight:700;font-size:14px;cursor:pointer;color:var(--ink)}
+.chips input{display:none}
+.chips label:has(input:checked){border-color:var(--brand);background:var(--brand-soft);color:var(--brand)}
+.agree{display:flex;align-items:center;gap:10px;margin:18px 0 6px;font-size:14px;color:var(--ink-2)}
+.agree input{width:20px;height:20px;accent-color:var(--brand)}
+.agree button{border:0;background:none;color:var(--brand);font-weight:700;text-decoration:underline;padding:0;font-size:14px}
+.agree.err{color:var(--red)}
+
+/* 오시는 길 */
+.map{display:grid;grid-template-columns:1.4fr 1fr;gap:20px}
+.mapbox{height:340px;border-radius:var(--r-lg);overflow:hidden;position:relative;background:#e8eef5;border:1px solid var(--line)}
+.mapbox svg{width:100%;height:100%}
+.mapbox .pin{position:absolute;left:52%;top:46%;transform:translate(-50%,-100%);color:var(--red)}
+.mapbox .note{position:absolute;left:12px;bottom:12px;background:#fff;border-radius:10px;padding:6px 10px;font-size:12px;color:var(--ink-3);box-shadow:var(--shadow)}
+.addr{border:1px solid var(--line);border-radius:var(--r-lg);padding:26px}
+.addr div{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.addr div:last-child{border:0}
+.addr svg{color:var(--brand);margin-top:3px}
+.addr b{display:block;font-size:13px;color:var(--ink-3);font-weight:700}
+
+footer{background:#0f1724;color:#a0aec0;font-size:14px;padding:40px 0 100px}
+footer .in{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer b{color:#fff}
+footer a{color:#cbd5e0;margin-right:14px}
+
+/* 모바일 하단 */
+.mbar{display:none}
+.sheet{position:fixed;inset:0;z-index:80;background:rgba(15,23,36,.5);display:flex;justify-content:flex-end}
+.sheet nav{background:#fff;width:min(320px,86vw);height:100%;padding:24px 20px;display:flex;flex-direction:column;gap:4px}
+.sheet nav a{padding:14px 12px;border-radius:12px;font-weight:800;font-size:17px}
+.sheet nav a:hover{background:var(--soft)}
+.modal{position:fixed;inset:0;z-index:95;background:rgba(15,23,36,.5);display:grid;place-items:center;padding:16px}
+.modal .box{background:#fff;border-radius:var(--r-lg);max-width:520px;width:100%;max-height:80vh;overflow:auto;padding:28px}
+.modal h3{margin-bottom:12px}
+.modal table{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0}
+.modal td,.modal th{border:1px solid var(--line);padding:8px 10px;text-align:left}
+.done{text-align:center}
+.done i{width:72px;height:72px;border-radius:50%;background:var(--mint-soft);color:var(--mint);display:grid;place-items:center;margin:0 auto 14px}
+.toast{position:fixed;left:50%;top:84px;transform:translateX(-50%);z-index:99;background:#121a26;color:#fff;border-radius:14px;padding:12px 18px;font-size:14px;box-shadow:var(--shadow-2);display:flex;gap:10px;align-items:center;max-width:92vw}
+.toast i{width:28px;height:28px;border-radius:50%;background:#fee500;color:#191600;display:grid;place-items:center;font-style:normal;font-weight:900;font-size:12px;flex:none}
+
+/* 관리자 */
+.admin{min-height:100vh;background:var(--soft);padding-bottom:80px}
+.admin .top{background:#fff;border-bottom:1px solid var(--line)}
+.admin .top .in{max-width:1160px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:12px}
+.admin .top h2{font-size:20px;flex:1}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:20px 0}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.kpi span{font-size:13px;color:var(--ink-3)}
+.kpi b{display:block;font-size:26px}
+.panel2{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.toolbar{display:flex;gap:8px;align-items:center;padding:14px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.toolbar input{height:40px;border:1px solid #cfd8e3;border-radius:10px;padding:0 12px;min-width:200px;flex:1;max-width:280px}
+.fchip{height:36px;padding:0 14px;border-radius:999px;border:1px solid #cfd8e3;background:#fff;font-weight:700;font-size:13px}
+.fchip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+table.list{width:100%;border-collapse:collapse;font-size:14px}
+table.list th{text-align:left;font-size:12px;color:var(--ink-3);padding:10px 14px;background:var(--soft);border-bottom:1px solid var(--line)}
+table.list td{padding:14px;border-bottom:1px solid var(--line);vertical-align:middle}
+.st{height:34px;border-radius:999px;border:1px solid transparent;padding:0 10px;font-weight:800;font-size:13px}
+.st.new{background:var(--red-soft);color:var(--red)}
+.st.ing{background:var(--warn-soft);color:var(--warn)}
+.st.done{background:var(--mint-soft);color:var(--mint)}
+.log{margin-top:16px;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;font-size:14px}
+.log h3{font-size:15px;margin-bottom:8px}
+.log div{display:flex;gap:10px;padding:6px 0;border-bottom:1px dashed var(--line);color:var(--ink-2)}
+.log div:last-child{border:0}
+.log em{font-style:normal;font-weight:800;color:var(--ink);white-space:nowrap}
+.empty{padding:40px;text-align:center;color:var(--ink-3)}
+
+/* 구조 */
+.how{padding:100px 0 120px}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:28px 0}
+.flow div{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:20px}
+.flow em{font-style:normal;font-weight:900;color:var(--brand);font-size:13px}
+.flow b{display:block;margin:4px 0}
+.flow p{margin:0;font-size:14px;color:var(--ink-2)}
+.cmp{width:100%;border-collapse:collapse;background:#fff;border-radius:var(--r);overflow:hidden;font-size:15px}
+.cmp th,.cmp td{border:1px solid var(--line);padding:12px 14px;text-align:left;vertical-align:top}
+.cmp th{background:var(--soft)}
+
+@media (max-width:900px){
+  nav.gnb,.hcta{display:none}
+  .burger{display:grid}
+  .hero{min-height:560px}
+  .hero .art{width:360px;right:-90px;bottom:-30px;opacity:.5}
+  .quick .grid{grid-template-columns:1fr 1fr}
+  .quick a{padding:16px;flex-direction:column;align-items:flex-start;gap:10px}
+  .about,.logi,.consult,.map{grid-template-columns:1fr;gap:28px}
+  .cards3{grid-template-columns:1fr}
+  .logos{grid-template-columns:repeat(3,1fr)}
+  .links{grid-template-columns:1fr 1fr}
+  .sec{padding:64px 0}
+  .grid2{grid-template-columns:1fr}
+  .form{padding:22px}
+  .kpis{grid-template-columns:1fr 1fr}
+  table.list .hm{display:none}
+  .flow{grid-template-columns:1fr 1fr}
+  .mbar{display:grid;grid-template-columns:1fr 1fr 1.4fr;gap:8px;position:fixed;left:0;right:0;bottom:44px;z-index:60;padding:10px 12px;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-top:1px solid var(--line)}
+  .mbar a{height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;gap:6px;font-weight:800;font-size:14px;border:1px solid var(--line);background:#fff}
+  .mbar a.p{background:var(--brand);color:#fff;border-color:var(--brand)}
+  footer{padding-bottom:150px}
+  .demobar .msg{display:none}
+}
+@media (max-width:420px){
+  .links{grid-template-columns:1fr}
+  .nums b{font-size:22px}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="i-logo" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3.5" y="8.5" width="17" height="7" rx="3.5" transform="rotate(-45 12 12)"/><path d="M9.5 9.5l5 5"/></g></symbol>
+  <symbol id="i-pill" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="8" width="18" height="8" rx="4"/><path d="M12 8v8"/></g></symbol>
+  <symbol id="i-clinic" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 20V9l8-5 8 5v11"/><path d="M12 9v6M9 12h6"/><path d="M9.5 20v-3h5v3"/></g></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 19.5h16"/><path d="M6.5 16l4-4.5 3 3L19 8.5"/><path d="M15.5 8.5H19V12"/></g></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M12 4c4.7 0 8.5 3.1 8.5 7s-3.8 7-8.5 7c-.9 0-1.8-.1-2.6-.3L5.3 19.6c-.4.2-.9-.2-.7-.7l.9-2.9C4.3 14.7 3.5 13 3.5 11c0-3.9 3.8-7 8.5-7z" fill="none" stroke="currentColor" stroke-width="1.9"/></symbol>
+  <symbol id="i-cart" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9"><path d="M3.5 5h2l2 10.5h10l2-7.5H7"/><circle cx="9.5" cy="19.5" r="1.3"/><circle cx="16.5" cy="19.5" r="1.3"/></g></symbol>
+  <symbol id="i-truck" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9"><path d="M3 6.5h11v9H3zM14 9.5h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17.5" cy="17.5" r="1.8"/></g></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3.2c2.2 1.3 4.4 2 6.4 2.3.4.1.6.4.6.8V12c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6.3c0-.4.2-.7.6-.8 2-.3 4.2-1 6.4-2.3z" fill="none" stroke="currentColor" stroke-width="1.9"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></g></symbol>
+  <symbol id="i-temp" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9"><path d="M10 14.5V5a2 2 0 0 1 4 0v9.5a4 4 0 1 1-4 0z"/><path d="M12 9v7"/></g></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></g></symbol>
+  <symbol id="i-out" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><path d="M14 5h5v5M19 5l-8 8"/><path d="M17 13.5V18a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 5 18V9a1.5 1.5 0 0 1 1.5-1.5H11"/></g></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></g></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M6.5 4h3l1.5 4-2 1.3a10 10 0 0 0 5.7 5.7L16 13l4 1.5v3A2 2 0 0 1 18 19.5C10.5 19 5 13.5 4.5 6A2 2 0 0 1 6.5 4z" fill="none" stroke="currentColor" stroke-width="1.9"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></g></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9"><path d="M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></g></symbol>
+  <symbol id="i-dl" viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 19.5h14" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9"><path d="M5 4.5h10a3 3 0 0 1 3 3v12H8a3 3 0 0 1-3-3z"/><path d="M5 16.5a3 3 0 0 1 3-3h10"/></g></symbol>
+</defs></svg>
+
+<div class="demobar">
+  <b>제안용 데모</b><span class="msg">회사명·숫자·연혁·주소는 예시예요. 상담을 신청한 뒤 '관리자'에서 확인해 보세요.</span><span class="sp"></span>
+  <button data-go="site" class="on">홈페이지</button><button data-go="admin">관리자</button><button data-go="how">구축 방식</button>
+</div>
+
+<!-- ===== 홈페이지 ===== -->
+<div id="site">
+<header id="hd"><div class="in">
+  <a class="logo" href="#top"><i><svg width="20" height="20"><use href="#i-logo"/></svg></i><span>○○팜 <small>(예시)</small></span></a>
+  <nav class="gnb"><a href="#about">회사소개</a><a href="#biz">사업분야</a><a href="#logistics">물류 경쟁력</a><a href="#partners">파트너</a><a href="#map">오시는 길</a></nav>
+  <a class="btn btn-white btn-sm hcta" href="#consult">상담 신청</a>
+  <button class="burger" id="burger" aria-label="메뉴 열기"><svg width="22" height="22"><use href="#i-menu"/></svg></button>
+</div></header>
+
+<section class="hero" id="top">
+  <svg class="art" viewBox="0 0 400 300" aria-hidden="true"><g fill="none" stroke="rgba(255,255,255,.55)" stroke-width="3"><rect x="40" y="110" width="200" height="80" rx="40" transform="rotate(-25 140 150)"/><path d="M118 108l46 84" transform="rotate(-25 140 150)"/><circle cx="300" cy="90" r="46"/><path d="M280 90h40M300 70v40"/><rect x="220" y="170" width="150" height="100" rx="18"/><path d="M245 200h100M245 225h70M245 250h85"/></g><g fill="rgba(255,255,255,.12)"><rect x="40" y="110" width="100" height="80" rx="40" transform="rotate(-25 140 150)"/></g></svg>
+  <div class="wrap">
+    <span class="tag"><svg width="16" height="16"><use href="#i-shield"/></svg>정신과 전문 의약품 유통 · 개원 컨설팅</span>
+    <h1>원장님의 진료가<br>멈추지 않도록</h1>
+    <p>정신과 전문 의약품의 안정적인 공급부터 개원과 병원 마케팅까지, 한 곳에서 책임지고 함께합니다.</p>
+    <div class="ctas"><a class="btn btn-white" href="#consult">개원·납품 상담 신청</a><a class="btn" style="border-color:rgba(255,255,255,.5);color:#fff" href="#" data-order>의약품 주문하기 <svg width="18" height="18"><use href="#i-out"/></svg></a></div>
+  </div>
+</section>
+
+<div class="quick"><div class="wrap"><div class="grid">
+  <a href="#" data-order><i><svg width="22" height="22"><use href="#i-cart"/></svg></i><span>의약품 주문<small>기존 주문 시스템</small></span></a>
+  <a href="#consult"><i><svg width="22" height="22"><use href="#i-chat"/></svg></i><span>상담 신청<small>개원·납품·마케팅</small></span></a>
+  <a href="#logistics"><i><svg width="22" height="22"><use href="#i-truck"/></svg></i><span>물류 경쟁력<small>KGSP·향정 관리</small></span></a>
+  <a href="#portal"><i><svg width="22" height="22"><use href="#i-link"/></svg></i><span>전문 포털<small>KIMS·NIMS 바로가기</small></span></a>
+</div></div></div>
+
+<section class="sec" id="about"><div class="wrap about">
+  <div>
+    <span class="eyebrow">ABOUT US</span>
+    <h2>정신과 원장님만을 위한<br>의약품 파트너</h2>
+    <p class="lead">정신과 의원에 필요한 전문 의약품을 빠짐없이 공급하고, 개원 준비와 병원 운영까지 함께 고민합니다. 오래 함께할 수 있는 신뢰를 가장 먼저 생각합니다.</p>
+    <div class="nums"><div><b>320+</b><span>거래 의원</span></div><div><b>99.8%</b><span>적시 납품률</span></div><div><b>45곳</b><span>개원 컨설팅</span></div></div>
+    <p class="ex" style="margin-top:8px">숫자는 예시예요. 실제 자료를 받아 바꿔요.</p>
+  </div>
+  <div>
+    <h3 style="font-size:19px;margin-bottom:10px">걸어온 길 <span class="ex">(예시)</span></h3>
+    <ul class="timeline">
+      <li><b>2026</b><p><strong>공식 홈페이지 오픈</strong>상담 신청을 온라인으로 받기 시작</p></li>
+      <li><b>2024</b><p><strong>개원·마케팅 컨설팅 사업 시작</strong>신규 개원 원장님 대상 원스톱 지원</p></li>
+      <li><b>2021</b><p><strong>KGSP 적격 물류센터 운영</strong>온도·습도 관리 보관 체계 구축</p></li>
+      <li><b>2018</b><p><strong>회사 설립</strong>정신과 전문 의약품 유통 시작</p></li>
+    </ul>
+  </div>
+</div></section>
+
+<section class="sec soft" id="biz"><div class="wrap">
+  <span class="eyebrow">BUSINESS</span>
+  <h2>세 가지로 함께합니다</h2>
+  <p class="lead">의약품 공급만이 아니라, 개원 준비와 환자 유입까지 이어서 돕습니다.</p>
+  <div class="cards3">
+    <div class="biz"><i style="background:var(--brand-soft);color:var(--brand)"><svg width="26" height="26"><use href="#i-pill"/></svg></i><h3>의약품 전문 공급</h3><p>정신과 처방 빈도가 높은 전문 의약품을 안정적으로 공급해요.</p><ul><li><svg width="16" height="16"><use href="#i-check"/></svg>향정신성의약품 전문 관리</li><li><svg width="16" height="16"><use href="#i-check"/></svg>품절 예상 품목 사전 안내</li><li><svg width="16" height="16"><use href="#i-check"/></svg>정기 납품 일정 관리</li></ul></div>
+    <div class="biz"><i style="background:var(--mint-soft);color:var(--mint)"><svg width="26" height="26"><use href="#i-clinic"/></svg></i><h3>개원 컨설팅</h3><p>입지 검토부터 인허가, 첫 의약품 세팅까지 개원 과정을 함께해요.</p><ul><li><svg width="16" height="16"><use href="#i-check"/></svg>입지·상권 분석</li><li><svg width="16" height="16"><use href="#i-check"/></svg>인허가·신고 절차 안내</li><li><svg width="16" height="16"><use href="#i-check"/></svg>초도 의약품 구성</li></ul></div>
+    <div class="biz"><i style="background:var(--warn-soft);color:var(--warn)"><svg width="26" height="26"><use href="#i-chart"/></svg></i><h3>마케팅 지원</h3><p>의료광고 기준을 지키면서 지역 환자에게 의원을 알리도록 도와요.</p><ul><li><svg width="16" height="16"><use href="#i-check"/></svg>홈페이지·블로그 운영 지원</li><li><svg width="16" height="16"><use href="#i-check"/></svg>지도·검색 노출 관리</li><li><svg width="16" height="16"><use href="#i-check"/></svg>의료광고 심의 안내</li></ul></div>
+  </div>
+</div></section>
+
+<section class="sec" id="logistics"><div class="wrap logi">
+  <div class="panel">
+    <span class="eyebrow" style="color:#9cc4ff">LOGISTICS</span>
+    <h3>KGSP 기준으로 보관하고<br>향정은 한 알까지 기록합니다</h3>
+    <p>의약품 유통품질관리기준(KGSP)에 맞춘 보관·배송 체계를 운영해요. <span class="ex" style="color:#c9dcf7">(문구는 예시예요)</span></p>
+    <div class="chk">
+      <div><svg width="22" height="22"><use href="#i-temp"/></svg><span><b>온도·습도 24시간 관리</b>보관 구역별 기록을 남겨요</span></div>
+      <div><svg width="22" height="22"><use href="#i-lock"/></svg><span><b>향정 이중 잠금 보관</b>출입·출고 기록을 따로 관리해요</span></div>
+      <div><svg width="22" height="22"><use href="#i-shield"/></svg><span><b>NIMS 실시간 보고</b>마약류 취급 내역을 빠짐없이 보고해요</span></div>
+    </div>
+  </div>
+  <div>
+    <span class="eyebrow">PROCESS</span>
+    <h2 style="font-size:28px">주문부터 도착까지</h2>
+    <div class="steps4" style="margin-top:20px">
+      <div><em>STEP 1</em><b>주문 접수</b><p>기존 주문 시스템으로 주문해요</p></div>
+      <div><em>STEP 2</em><b>검수·포장</b><p>유효기간·수량을 두 번 확인해요</p></div>
+      <div><em>STEP 3</em><b>출고 보고</b><p>향정은 NIMS에 바로 보고해요</p></div>
+      <div><em>STEP 4</em><b>당일·익일 도착</b><p>지역별 배송 일정을 안내해요</p></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="sec soft" id="partners"><div class="wrap">
+  <span class="eyebrow">PARTNERS</span>
+  <h2>함께하는 제약사</h2>
+  <p class="lead">로고를 누르면 각 제약사 공식 홈페이지로 이동해요. <span class="ex">(실제 로고와 주소는 받아서 넣어요)</span></p>
+  <div class="logos" id="logos"></div>
+  <h3 id="portal" style="font-size:20px;margin:40px 0 0">원장님이 자주 쓰는 전문 포털</h3>
+  <div class="links">
+    <a href="https://www.kims.co.kr" target="_blank" rel="noopener"><i><svg width="20" height="20"><use href="#i-book"/></svg></i><span>KIMS<small>의약품 정보</small></span><svg class="arr" width="16" height="16"><use href="#i-out"/></svg></a>
+    <a href="https://www.druginfo.co.kr" target="_blank" rel="noopener"><i><svg width="20" height="20"><use href="#i-pill"/></svg></i><span>드러그인포<small>의약품 검색</small></span><svg class="arr" width="16" height="16"><use href="#i-out"/></svg></a>
+    <a href="https://www.nims.or.kr" target="_blank" rel="noopener"><i><svg width="20" height="20"><use href="#i-shield"/></svg></i><span>NIMS<small>마약류 통합관리</small></span><svg class="arr" width="16" height="16"><use href="#i-out"/></svg></a>
+    <a href="https://www.kpis.or.kr" target="_blank" rel="noopener"><i><svg width="20" height="20"><use href="#i-truck"/></svg></i><span>KPIS<small>의약품 관리 종합정보</small></span><svg class="arr" width="16" height="16"><use href="#i-out"/></svg></a>
+  </div>
+  <div class="order"><div><h3>이미 거래 중이신가요?</h3><p>의약품 주문은 기존에 쓰시던 주문 시스템에서 그대로 하시면 돼요.</p></div><a class="btn btn-primary" href="#" data-order>주문 시스템 열기 <svg width="18" height="18"><use href="#i-out"/></svg></a></div>
+</div></section>
+
+<section class="sec" id="consult"><div class="wrap consult">
+  <div>
+    <span class="eyebrow">CONSULTING</span>
+    <h2>상담을 남겨 주시면<br>담당자가 바로 연락드려요</h2>
+    <p class="lead">신청이 들어오면 담당자 휴대폰으로 바로 알림이 가요. 영업일 기준 당일 안에 연락드립니다.</p>
+    <div class="why">
+      <div><i><svg width="20" height="20"><use href="#i-bell"/></svg></i><span><b>접수 즉시 알림</b>담당자에게 문자·카카오 알림톡이 바로 가요</span></div>
+      <div><i><svg width="20" height="20"><use href="#i-clock"/></svg></i><span><b>당일 회신</b>평일 오후 5시 전 신청은 당일 연락드려요</span></div>
+      <div><i><svg width="20" height="20"><use href="#i-lock"/></svg></i><span><b>안전한 정보 보관</b>상담 목적 외에는 쓰지 않아요</span></div>
+    </div>
+  </div>
+  <form class="form" id="cform" novalidate>
+    <h3>상담 신청</h3><p class="ex" style="margin:0 0 6px">* 표시는 꼭 적어 주세요</p>
+    <div class="f"><label>상담 분야 <em>*</em></label><div class="chips" id="ctype"><label><input type="checkbox" value="납품"> 의약품 납품</label><label><input type="checkbox" value="개원"> 개원 컨설팅</label><label><input type="checkbox" value="마케팅"> 마케팅</label><label><input type="checkbox" value="기타"> 기타</label></div><span id="typeMsg" style="font-size:13px;color:var(--red)" hidden>상담 분야를 하나 이상 골라 주세요</span></div>
+    <div class="grid2">
+      <div class="f" data-f="hospital"><label for="hospital">병원명 <em>*</em></label><input id="hospital" maxlength="40" placeholder="예) ○○정신건강의학과의원" autocomplete="organization"><span class="msg">병원명을 적어 주세요</span></div>
+      <div class="f" data-f="name"><label for="name">성함 <em>*</em></label><input id="name" maxlength="20" placeholder="예) 홍길동" autocomplete="name"><span class="msg">성함을 적어 주세요</span></div>
+      <div class="f" data-f="phone"><label for="phone">연락처 <em>*</em></label><input id="phone" inputmode="tel" maxlength="13" placeholder="010-0000-0000" autocomplete="tel"><span class="msg">휴대폰 번호를 정확히 적어 주세요</span></div>
+      <div class="f" data-f="region"><label for="region">지역 <em>*</em></label><select id="region"><option value="">선택해 주세요</option><option>서울</option><option>경기</option><option>인천</option><option>강원</option><option>충청</option><option>전라</option><option>경상</option><option>제주</option></select><span class="msg">지역을 골라 주세요</span></div>
+    </div>
+    <div class="f"><label for="memo">문의 내용</label><textarea id="memo" maxlength="1000" placeholder="개원 예정 시기, 필요한 품목 등 편하게 적어 주세요"></textarea></div>
+    <label class="agree" id="agreeRow"><input type="checkbox" id="agree"> <span>개인정보 수집·이용에 동의합니다 <em style="color:var(--red);font-style:normal">(필수)</em></span> <button type="button" id="viewTerms">내용 보기</button></label>
+    <button class="btn btn-primary" style="width:100%;margin-top:10px" type="submit">상담 신청하기</button>
+  </form>
+</div></section>
+
+<section class="sec soft" id="map"><div class="wrap">
+  <span class="eyebrow">LOCATION</span>
+  <h2>오시는 길</h2>
+  <div class="map" style="margin-top:24px">
+    <div class="mapbox">
+      <svg viewBox="0 0 600 340" preserveAspectRatio="xMidYMid slice"><rect width="600" height="340" fill="#eaf0f6"/><g stroke="#fff" stroke-width="14"><path d="M0 120h600M0 250h600M150 0v340M420 0v340"/></g><g stroke="#fff" stroke-width="6"><path d="M0 60h600M0 190h600M60 0v340M290 0v340M520 0v340"/></g><g fill="#dbe7d3"><rect x="300" y="200" width="110" height="40" rx="6"/><rect x="70" y="130" width="70" height="50" rx="6"/></g><rect x="430" y="70" width="80" height="40" rx="6" fill="#cfe0f5"/></svg>
+      <span class="pin"><svg width="40" height="40"><use href="#i-pin"/></svg></span>
+      <span class="note">실제 사이트에서는 카카오맵(또는 네이버 지도)이 들어가요</span>
+    </div>
+    <div class="addr">
+      <div><svg width="20" height="20"><use href="#i-pin"/></svg><span><b>주소</b>인천광역시 서구 ○○로 00 (예시)</span></div>
+      <div><svg width="20" height="20"><use href="#i-phone"/></svg><span><b>대표 전화</b>000-0000-0000 (예시)</span></div>
+      <div><svg width="20" height="20"><use href="#i-clock"/></svg><span><b>운영 시간</b>평일 09:00 ~ 18:00 · 주말·공휴일 휴무</span></div>
+      <div><svg width="20" height="20"><use href="#i-truck"/></svg><span><b>물류센터</b>인천광역시 서구 ○○로 00 (예시)</span></div>
+    </div>
+  </div>
+</div></section>
+
+<footer><div class="wrap in">
+  <div><b>○○팜 (예시)</b><br>대표 ○○○ · 사업자등록번호 000-00-00000 · 의약품도매업 허가 제0000호<br>인천광역시 서구 ○○로 00 · 대표 전화 000-0000-0000</div>
+  <div><a href="#" id="privacyLink">개인정보처리방침</a><a href="#consult">상담 신청</a></div>
+</div></footer>
+
+<div class="mbar"><a href="tel:00000000000" id="callBtn"><svg width="18" height="18"><use href="#i-phone"/></svg>전화</a><a href="#" data-order><svg width="18" height="18"><use href="#i-cart"/></svg>주문</a><a class="p" href="#consult"><svg width="18" height="18"><use href="#i-chat"/></svg>상담 신청</a></div>
+</div>
+
+<div class="sheet" id="sheet" hidden><nav><a href="#about">회사소개</a><a href="#biz">사업분야</a><a href="#logistics">물류 경쟁력</a><a href="#partners">파트너·전문 포털</a><a href="#map">오시는 길</a><a href="#consult" class="btn btn-primary" style="margin-top:12px">상담 신청</a></nav></div>
+
+<div class="modal" id="terms" hidden><div class="box">
+  <h3>개인정보 수집·이용 동의 <span class="ex">(예시 문안)</span></h3>
+  <table><tr><th>수집 항목</th><td>병원명, 성함, 연락처, 지역, 문의 내용</td></tr><tr><th>이용 목적</th><td>개원·납품·마케팅 상담 연락</td></tr><tr><th>보관 기간</th><td>상담 완료 후 1년 (요청 시 즉시 삭제)</td></tr></table>
+  <p class="ex">동의하지 않으셔도 되지만, 이 경우 온라인 상담 신청은 할 수 없어요.</p>
+  <button class="btn btn-primary btn-sm" data-close>확인</button>
+</div></div>
+
+<div class="modal" id="doneModal" hidden><div class="box done">
+  <i><svg width="34" height="34"><use href="#i-check"/></svg></i>
+  <h3>상담 신청이 접수됐어요</h3>
+  <p style="color:var(--ink-2)">담당자가 영업일 기준 당일 안에 연락드릴게요.<br><span class="ex">데모라서 실제로 연락이 가지는 않아요. 아래 '관리자'에서 접수된 내용을 확인해 보세요.</span></p>
+  <div style="display:flex;gap:8px;justify-content:center"><button class="btn btn-line btn-sm" data-close>닫기</button><button class="btn btn-primary btn-sm" data-go="admin">관리자에서 보기</button></div>
+</div></div>
+
+<!-- ===== 관리자 ===== -->
+<div class="admin" id="admin" hidden>
+  <div class="top"><div class="in"><h2>상담 접수 관리</h2><button class="btn btn-line btn-sm" id="csv"><svg width="16" height="16"><use href="#i-dl"/></svg>엑셀 받기</button></div></div>
+  <div class="wrap">
+    <div class="kpis"><div class="kpi"><span>새 접수</span><b id="kNew">0</b></div><div class="kpi"><span>상담 중</span><b id="kIng">0</b></div><div class="kpi"><span>완료</span><b id="kDone">0</b></div><div class="kpi"><span>이번 달 전체</span><b id="kAll">0</b></div></div>
+    <div class="panel2">
+      <div class="toolbar"><input id="q" type="search" placeholder="병원명·성함 검색"><button class="fchip on" data-s="">전체</button><button class="fchip" data-s="new">새 접수</button><button class="fchip" data-s="ing">상담 중</button><button class="fchip" data-s="done">완료</button></div>
+      <table class="list"><thead><tr><th>접수 시각</th><th>병원 · 성함</th><th class="hm">분야</th><th class="hm">지역</th><th class="hm">연락처</th><th>처리 상태</th></tr></thead><tbody id="rows"></tbody></table>
+    </div>
+    <div class="log"><h3>알림 발송 기록 <span class="ex">(데모에서는 실제로 보내지 않아요)</span></h3><div id="logs"></div></div>
+  </div>
+</div>
+
+<!-- ===== 구축 방식 ===== -->
+<section class="how" id="how" hidden><div class="wrap">
+  <span class="eyebrow">HOW IT WORKS</span>
+  <h2 style="font-size:30px">상담이 누락되지 않는 구조</h2>
+  <p class="lead">홈페이지는 빠르고 저렴하게, 상담 접수는 두 곳에 동시에 남기고, 알림은 담당자 휴대폰으로 바로 보냅니다.</p>
+  <div class="flow">
+    <div><em>1</em><b>원장님이 상담 신청</b><p>필수 항목·동의를 확인한 뒤에만 보내져요</p></div>
+    <div><em>2</em><b>DB에 저장</b><p>저장이 끝나야 '접수 완료'를 보여 줘요. 실패하면 다시 보내라고 안내해요</p></div>
+    <div><em>3</em><b>담당자에게 즉시 알림</b><p>카카오 알림톡(실패 시 문자로 자동 대체) + 이메일</p></div>
+    <div><em>4</em><b>관리자에서 처리</b><p>새 접수 → 상담 중 → 완료, 엑셀 받기</p></div>
+  </div>
+  <table class="cmp">
+    <tr><th></th><th>A안 (추천) 맞춤 제작</th><th>B안 웹빌더(아임웹 등)</th></tr>
+    <tr><th>화면</th><td>시안 그대로 자유롭게 구현, 모바일 최적화</td><td>템플릿 안에서 수정</td></tr>
+    <tr><th>상담 관리</th><td>전용 관리자 화면: 상태 관리, 검색, 엑셀</td><td>빌더 기본 폼 게시판</td></tr>
+    <tr><th>알림</th><td>알림톡·문자·이메일 동시 발송, 실패 기록</td><td>대부분 이메일 알림</td></tr>
+    <tr><th>월 비용</th><td>호스팅 0원~ + 알림 건당 요금(알림톡 약 10원대, 문자 약 20원대)</td><td>빌더 요금제 월 1~3만 원대</td></tr>
+    <tr><th>글 수정</th><td>관리자에서 연혁·파트너 로고·링크 수정</td><td>빌더 편집기로 직접 수정</td></tr>
+  </table>
+  <p class="ex" style="margin-top:10px">알림톡은 회사 명의의 카카오 비즈니스 채널과 문구 심사가 필요해요(보통 며칠 걸려요). 심사 전에는 문자로 먼저 운영해요. 요금은 발송 대행사마다 달라서 계약 전 확인해 드려요.</p>
+</div></section>
+
+<div class="toast" id="toast" hidden></div>
+
+<script>
+(function(){
+  var KEY = 'pharm-demo-v1';
+  var STATUS = {new:'새 접수', ing:'상담 중', done:'완료'};
+  function pad(n){ return String(n).padStart(2, '0'); }
+  function stamp(d){ return (d.getMonth()+1) + '/' + d.getDate() + ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes()); }
+  function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function mask(p){ return p.replace(/^(\d{3})-?(\d{3,4})-?(\d{4})$/, '$1-****-$3'); }
+  function seed(){
+    var now = Date.now(), h = 36e5;
+    return {items:[
+      {id:1, at:now - 2*h, type:['개원'], hospital:'○○정신건강의학과의원', name:'김○○', phone:'010-1234-5678', region:'경기', memo:'내년 3월 개원 예정입니다.', st:'new'},
+      {id:2, at:now - 26*h, type:['납품'], hospital:'△△마음의원', name:'이○○', phone:'010-2345-6789', region:'서울', memo:'', st:'ing'},
+      {id:3, at:now - 74*h, type:['마케팅','납품'], hospital:'□□정신과의원', name:'박○○', phone:'010-3456-7890', region:'인천', memo:'블로그 운영 문의', st:'done'}
+    ], logs:[]};
+  }
+  var db = (function(){ try { var s = JSON.parse(localStorage.getItem(KEY)); if (s && s.items) return s; } catch(e){} return seed(); })();
+  function save(){ try { localStorage.setItem(KEY, JSON.stringify(db)); return true; } catch(e){ return false; } }
+  function toast(html, ms){ var t = document.getElementById('toast'); t.innerHTML = html; t.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(function(){ t.hidden = true; }, ms || 3200); }
+
+  // 화면 전환
+  function go(v){
+    document.getElementById('site').hidden = v !== 'site';
+    document.getElementById('admin').hidden = v !== 'admin';
+    document.getElementById('how').hidden = v !== 'how';
+    document.querySelectorAll('.demobar [data-go]').forEach(function(b){ b.classList.toggle('on', b.dataset.go === v); });
+    document.querySelectorAll('.modal').forEach(function(m){ m.hidden = true; });
+    if (v === 'admin') renderAdmin();
+    if (v !== 'site') window.scrollTo(0, 0);
+    try { history.replaceState(null, '', v === 'site' ? location.pathname : '#' + v); } catch(e){}
+  }
+  document.addEventListener('click', function(e){
+    var g = e.target.closest('[data-go]'); if (g){ go(g.dataset.go); return; }
+    if (e.target.closest('[data-order]')){ e.preventDefault(); toast('실제 사이트에서는 기존 의약품 주문 시스템이 새 창으로 열려요'); return; }
+    if (e.target.closest('[data-close]') || e.target.classList.contains('modal')){ document.querySelectorAll('.modal').forEach(function(m){ m.hidden = true; }); }
+    var a = e.target.closest('#sheet a'); if (a || e.target.id === 'sheet') document.getElementById('sheet').hidden = true;
+  });
+  document.getElementById('burger').onclick = function(){ document.getElementById('sheet').hidden = false; };
+  document.getElementById('callBtn').onclick = function(e){ e.preventDefault(); toast('실제 사이트에서는 누르면 대표 번호로 바로 전화가 걸려요'); };
+  document.getElementById('privacyLink').onclick = function(e){ e.preventDefault(); document.getElementById('terms').hidden = false; };
+  document.getElementById('viewTerms').onclick = function(){ document.getElementById('terms').hidden = false; };
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape'){ document.querySelectorAll('.modal').forEach(function(m){ m.hidden = true; }); document.getElementById('sheet').hidden = true; } });
+
+  // 헤더 배경
+  var hd = document.getElementById('hd');
+  function onScroll(){ hd.classList.toggle('solid', window.scrollY > 40); }
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  // 파트너 로고 자리
+  var P = ['제약사 A','제약사 B','제약사 C','제약사 D','제약사 E','제약사 F'];
+  document.getElementById('logos').innerHTML = P.map(function(p){ return '<a href="#" data-logo>' + p + '<span class="ex" style="display:block;font-weight:500">로고 자리</span></a>'; }).join('');
+  document.getElementById('logos').onclick = function(e){ if (e.target.closest('[data-logo]')){ e.preventDefault(); toast('실제 사이트에서는 제약사 공식 홈페이지가 새 창으로 열려요'); } };
+
+  // 상담 폼
+  var phone = document.getElementById('phone');
+  phone.addEventListener('input', function(){ var d = phone.value.replace(/\D/g, '').slice(0, 11); phone.value = d.length < 4 ? d : d.length < 8 ? d.slice(0,3) + '-' + d.slice(3) : d.slice(0,3) + '-' + d.slice(3, d.length - 4) + '-' + d.slice(-4); });
+  function setErr(key, on){ var f = document.querySelector('[data-f="' + key + '"]'); if (f) f.classList.toggle('err', on); }
+  ['hospital','name','phone','region'].forEach(function(k){ var el = document.getElementById(k); el.addEventListener('input', function(){ setErr(k, false); }); el.addEventListener('change', function(){ setErr(k, false); }); });
+  document.getElementById('ctype').addEventListener('change', function(){ document.getElementById('typeMsg').hidden = true; });
+  document.getElementById('agree').addEventListener('change', function(){ document.getElementById('agreeRow').classList.remove('err'); });
+  var sending = false;
+  document.getElementById('cform').onsubmit = function(e){
+    e.preventDefault(); if (sending) return;
+    var v = function(id){ return document.getElementById(id).value.trim(); };
+    var types = [].slice.call(document.querySelectorAll('#ctype input:checked')).map(function(i){ return i.value; });
+    var bad = [];
+    if (!types.length){ document.getElementById('typeMsg').hidden = false; bad.push(document.getElementById('ctype')); }
+    if (!v('hospital')){ setErr('hospital', true); bad.push(document.getElementById('hospital')); }
+    if (!v('name')){ setErr('name', true); bad.push(document.getElementById('name')); }
+    if (!/^01[016789]-?\d{3,4}-?\d{4}$/.test(v('phone'))){ setErr('phone', true); bad.push(phone); }
+    if (!v('region')){ setErr('region', true); bad.push(document.getElementById('region')); }
+    if (!document.getElementById('agree').checked){ document.getElementById('agreeRow').classList.add('err'); bad.push(document.getElementById('agree')); }
+    if (bad.length){ bad[0].scrollIntoView({block:'center', behavior:'smooth'}); if (bad[0].focus) bad[0].focus({preventScroll:true}); toast('빨간 칸을 확인해 주세요', 2000); return; }
+    sending = true;
+    var btn = this.querySelector('[type=submit]'); btn.disabled = true; btn.textContent = '보내는 중…';
+    var item = {id:Date.now(), at:Date.now(), type:types, hospital:v('hospital'), name:v('name'), phone:v('phone'), region:v('region'), memo:v('memo'), st:'new'};
+    setTimeout(function(){
+      db.items.unshift(item);
+      var t = stamp(new Date());
+      db.logs.unshift({at:t, ch:'알림톡', text:'[새 상담] ' + item.hospital + ' / ' + item.name + ' / ' + types.join('·')});
+      db.logs.unshift({at:t, ch:'이메일', text:'담당자 메일로 상담 내용 전체 전송'});
+      if (!save()){ db.items.shift(); db.logs.splice(0, 2); toast('저장하지 못했어요. 다시 시도해 주세요'); }
+      else {
+        document.getElementById('cform').reset();
+        document.getElementById('doneModal').hidden = false;
+        setTimeout(function(){ toast('<i>톡</i><span><b>담당자 휴대폰 알림 (예시)</b><br>[새 상담] ' + esc(item.hospital) + ' · ' + esc(item.region) + ' · ' + esc(types.join('·')) + '</span>', 4200); }, 600);
+      }
+      btn.disabled = false; btn.textContent = '상담 신청하기'; sending = false;
+    }, 700);
+  };
+
+  // 관리자
+  var fst = '';
+  function renderAdmin(){
+    var q = document.getElementById('q').value.trim();
+    var c = {new:0, ing:0, done:0};
+    db.items.forEach(function(i){ c[i.st]++; });
+    document.getElementById('kNew').textContent = c.new; document.getElementById('kIng').textContent = c.ing; document.getElementById('kDone').textContent = c.done; document.getElementById('kAll').textContent = db.items.length;
+    var list = db.items.filter(function(i){ return (!fst || i.st === fst) && (!q || (i.hospital + i.name).indexOf(q) >= 0); });
+    document.getElementById('rows').innerHTML = list.length ? list.map(function(i){
+      return '<tr><td>' + stamp(new Date(i.at)) + '</td><td><b>' + esc(i.hospital) + '</b><div class="ex">' + esc(i.name) + (i.memo ? ' · ' + esc(i.memo.slice(0, 24)) : '') + '</div></td><td class="hm">' + esc(i.type.join('·')) + '</td><td class="hm">' + esc(i.region) + '</td><td class="hm">' + esc(i.phone) + '</td><td><select class="st ' + i.st + '" data-id="' + i.id + '">' + Object.keys(STATUS).map(function(k){ return '<option value="' + k + '"' + (k === i.st ? ' selected' : '') + '>' + STATUS[k] + '</option>'; }).join('') + '</select></td></tr>';
+    }).join('') : '<tr><td colspan="6" class="empty">해당하는 상담이 없어요</td></tr>';
+    document.getElementById('logs').innerHTML = db.logs.length ? db.logs.slice(0, 8).map(function(l){ return '<div><em>' + esc(l.at) + '</em><em>' + esc(l.ch) + '</em><span>' + esc(l.text) + '</span></div>'; }).join('') : '<div>아직 발송 기록이 없어요. 홈페이지에서 상담을 신청해 보세요.</div>';
+  }
+  document.getElementById('rows').addEventListener('change', function(e){
+    var s = e.target.closest('select[data-id]'); if (!s) return;
+    var it = db.items.filter(function(i){ return String(i.id) === s.dataset.id; })[0]; if (!it) return;
+    it.st = s.value; save(); renderAdmin(); toast(esc(it.hospital) + ' → ' + STATUS[it.st], 1800);
+  });
+  document.getElementById('q').oninput = renderAdmin;
+  document.querySelectorAll('.fchip').forEach(function(b){ b.onclick = function(){ fst = b.dataset.s; document.querySelectorAll('.fchip').forEach(function(x){ x.classList.toggle('on', x === b); }); renderAdmin(); }; });
+  document.getElementById('csv').onclick = function(){
+    var rows = [['접수 시각','병원명','성함','연락처','지역','분야','문의 내용','처리 상태']].concat(db.items.map(function(i){ return [new Date(i.at).toLocaleString('ko-KR'), i.hospital, i.name, i.phone, i.region, i.type.join('·'), i.memo, STATUS[i.st]]; }));
+    var csv = '﻿' + rows.map(function(r){ return r.map(function(x){ x = String(x == null ? '' : x); if (/^[=+\-@]/.test(x)) x = "'" + x; return '"' + x.replace(/"/g, '""') + '"'; }).join(','); }).join('\r\n');
+    var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], {type:'text/csv;charset=utf-8'})); a.download = '상담접수_예시.csv'; document.body.appendChild(a); a.click(); a.remove();
+    toast('엑셀에서 열 수 있는 파일로 받았어요', 1800);
+  };
+
+  var h = location.hash.slice(1);
+  go(h === 'admin' || h === 'how' ? h : 'site');
+})();
+</script>
+</body>
+</html>
