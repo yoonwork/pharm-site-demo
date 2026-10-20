@@ -580,6 +580,10 @@ table.list tr[data-row]:hover td{background:#fafcff}
 }
 
 /* ===== 검토 반영 ===== */
+.log #logs{display:block;padding:0;border:0}
+#logs>div{display:flex;gap:10px;padding:6px 0;border-bottom:1px dashed var(--line);color:var(--ink-2);flex-wrap:wrap}
+#logs>div:last-child{border:0}
+.panel2{overflow-x:auto}
 body{word-break:keep-all;overflow-wrap:anywhere}
 .agree{min-height:44px}
 .agree button{white-space:nowrap;padding:11px 4px}
@@ -835,7 +839,7 @@ table.list th,.cmp th{background:#fff}
       <div id="tabList">
         <div class="kpis"><div class="kpi"><span>새 접수</span><b id="kNew">0</b></div><div class="kpi"><span>상담 중</span><b id="kIng">0</b></div><div class="kpi"><span>완료</span><b id="kDone">0</b></div><div class="kpi"><span>전체</span><b id="kAll">0</b></div></div>
         <div class="panel2">
-          <div class="toolbar"><input id="q" type="search" placeholder="병원명·성함 검색"><button class="fchip on" data-s="">전체</button><button class="fchip" data-s="new">새 접수</button><button class="fchip" data-s="ing">상담 중</button><button class="fchip" data-s="done">완료</button><button class="btn btn-line btn-sm" id="csv" style="margin-left:auto"><svg width="16" height="16"><use href="#i-dl"/></svg>엑셀(CSV) 받기</button></div>
+          <div class="toolbar"><input id="q" type="search" placeholder="병원명·성함·연락처 검색"><button class="fchip on" data-s="">전체</button><button class="fchip" data-s="new">새 접수</button><button class="fchip" data-s="ing">상담 중</button><button class="fchip" data-s="done">완료</button><button class="btn btn-line btn-sm" id="csv" style="margin-left:auto"><svg width="16" height="16"><use href="#i-dl"/></svg>엑셀(CSV) 받기</button></div>
           <table class="list"><thead><tr><th>접수 시각</th><th>병원 · 성함</th><th class="hm">분야</th><th class="hm">지역</th><th class="hm">연락처</th><th>처리 상태</th></tr></thead><tbody id="rows"></tbody></table>
         </div>
         <p class="ex" style="margin:8px 2px 0">줄을 누르면 상세 내용과 전화 걸기 버튼이 열려요.</p>
@@ -903,7 +907,7 @@ table.list th,.cmp th{background:#fff}
 
   // ----- 화면 전환 -----
   var view = 'site';
-  function go(v, push){
+  function go(v, push, keepUrl){
     view = v;
     $('site').hidden = v !== 'site'; $('admin').hidden = v !== 'admin'; $('how').hidden = v !== 'how';
     document.querySelectorAll('.demobar [data-go]').forEach(function(b){ b.classList.toggle('on', b.dataset.go === v); });
@@ -911,10 +915,11 @@ table.list th,.cmp th{background:#fff}
     if (v === 'admin') showAdmin();
     if (v !== 'site') window.scrollTo(0, 0);
     slider.run(v === 'site');
+    if (keepUrl) return;
     var h = v === 'site' ? location.pathname + location.search : '#' + v;
     try { if (push) history.pushState({v:v}, '', h); else history.replaceState({v:v}, '', h); } catch(e){}
   }
-  window.addEventListener('popstate', function(){ var h = location.hash.slice(1); go(h === 'admin' || h === 'how' ? h : 'site'); });
+  window.addEventListener('popstate', function(){ var h = location.hash.slice(1), v = h === 'admin' || h === 'how' ? h : 'site'; if (v !== view) go(v, false, true); });
 
   document.addEventListener('click', function(e){
     var g = e.target.closest('[data-go]'); if (g){ go(g.dataset.go, true); return; }
@@ -967,7 +972,7 @@ table.list th,.cmp th{background:#fff}
 
   // ----- 상담 폼 -----
   var phone = $('phone');
-  function fmtPhone(d){ d = d.replace(/\D/g, '').slice(0, 11); if (/^02/.test(d)) return d.length < 3 ? d : d.length < 6 ? d.slice(0,2) + '-' + d.slice(2) : d.slice(0,2) + '-' + d.slice(2, d.length - 4) + '-' + d.slice(-4); return d.length < 4 ? d : d.length < 8 ? d.slice(0,3) + '-' + d.slice(3) : d.slice(0,3) + '-' + d.slice(3, d.length - 4) + '-' + d.slice(-4); }
+  function fmtPhone(d){ d = d.replace(/\D/g, ''); if (/^82/.test(d)) d = '0' + d.slice(2); d = d.slice(0, 11); if (/^02/.test(d)) return d.length < 3 ? d : d.length < 6 ? d.slice(0,2) + '-' + d.slice(2) : d.slice(0,2) + '-' + d.slice(2, d.length - 4) + '-' + d.slice(-4); return d.length < 4 ? d : d.length < 8 ? d.slice(0,3) + '-' + d.slice(3) : d.slice(0,3) + '-' + d.slice(3, d.length - 4) + '-' + d.slice(-4); }
   phone.addEventListener('input', function(){ phone.value = fmtPhone(phone.value); });
   function validPhone(p){ var d = p.replace(/\D/g, ''); return /^01[016789]\d{7,8}$/.test(d) || /^02\d{7,8}$/.test(d) || /^0[3-6][1-5]\d{7,8}$/.test(d) || /^0[78]0\d{7,8}$/.test(d); }
   function setErr(key, on){ var f = document.querySelector('[data-f="' + key + '"]'); if (f) f.classList.toggle('err', on); }
@@ -998,7 +1003,7 @@ table.list th,.cmp th{background:#fff}
       save();
       $('cform').reset();
       document.querySelectorAll('.f.err').forEach(function(f){ f.classList.remove('err'); });
-      $('doneModal').hidden = false;
+      if (view === 'site') $('doneModal').hidden = false; else if (view === 'admin' && authed) renderAdmin();
       setTimeout(function(){ toast('<i>문자</i><span><b>담당자 휴대폰 알림 (예시)</b><br>[새 상담] ' + esc(item.hospital) + ' · ' + esc(item.region) + ' · ' + esc(types.join('·')) + '</span>', 4200); }, 600);
       btn.disabled = false; btn.textContent = '상담 신청하기'; sending = false;
     }, 700);
@@ -1027,7 +1032,7 @@ table.list th,.cmp th{background:#fff}
     var q = $('q').value.trim(), c = {new:0, ing:0, done:0};
     db.items.forEach(function(i){ c[i.st]++; });
     $('kNew').textContent = c.new; $('kIng').textContent = c.ing; $('kDone').textContent = c.done; $('kAll').textContent = db.items.length;
-    var list = db.items.filter(function(i){ return (!fst || i.st === fst) && (!q || (i.hospital + i.name).indexOf(q) >= 0); });
+    var list = db.items.filter(function(i){ return (!fst || i.st === fst) && (!q || (i.hospital + ' ' + i.name + ' ' + i.phone).indexOf(q) >= 0); });
     $('rows').innerHTML = list.length ? list.map(function(i){
       return '<tr data-row="' + i.id + '"><td>' + stamp(new Date(i.at)) + '</td><td><b>' + esc(i.hospital) + '</b><div class="ex">' + esc(i.name) + '</div></td><td class="hm">' + esc(i.type.join('·')) + '</td><td class="hm">' + esc(i.region) + '</td><td class="hm">' + esc(i.phone) + '</td><td><select class="st ' + i.st + '" data-id="' + i.id + '" aria-label="처리 상태">' + opts(i.st) + '</select></td></tr>';
     }).join('') : '<tr><td colspan="6" class="empty">해당하는 상담이 없어요</td></tr>';
@@ -1052,7 +1057,7 @@ table.list th,.cmp th{background:#fff}
   $('csv').onclick = function(){
     var rows = [['접수 시각','병원명','성함','연락처','지역','분야','문의 내용','처리 상태']].concat(db.items.map(function(i){ return [new Date(i.at).toLocaleString('ko-KR'), i.hospital, i.name, i.phone, i.region, i.type.join('·'), i.memo, STATUS[i.st]]; }));
     var csv = '﻿' + rows.map(function(r){ return r.map(function(x){ x = String(x == null ? '' : x); if (/^[=+\-@\t\r]/.test(x)) x = "'" + x; return '"' + x.replace(/"/g, '""') + '"'; }).join(','); }).join('\r\n');
-    var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], {type:'text/csv;charset=utf-8'})); a.download = '상담접수_예시.csv'; document.body.appendChild(a); a.click(); a.remove();
+    var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], {type:'text/csv;charset=utf-8'})); a.download = '상담접수_예시.csv'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function(){ URL.revokeObjectURL(a.href); }, 1000);
     toast('엑셀에서 열리는 파일(CSV)로 받았어요', 1800);
   };
   function fillEdit(){
@@ -1072,7 +1077,7 @@ table.list th,.cmp th{background:#fff}
   };
 
   var h = location.hash.slice(1);
-  go(h === 'admin' || h === 'how' ? h : 'site');
+  if (h === 'admin' || h === 'how') go(h); else go('site', false, true);
 })();
 </script>
 </body>
