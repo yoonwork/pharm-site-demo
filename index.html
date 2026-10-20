@@ -579,6 +579,26 @@ table.list tr[data-row]:hover td{background:#fafcff}
   .edit .grid{grid-template-columns:1fr 1fr}
 }
 
+
+/* ===== 2차 검토 반영 ===== */
+html{scroll-padding-top:96px}
+.hv{min-height:calc(100vh - 56px);min-height:calc(100svh - 56px)}
+.mega{white-space:nowrap}
+.chips label{position:relative}
+.chips input{display:block}
+.vcards{scrollbar-width:none}
+.vcards::-webkit-scrollbar{display:none}
+.qconsult select{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6' fill='none' stroke='%23ffffff' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 0 center;padding-right:22px}
+.mapbox .note{bottom:auto;top:12px}
+.mbar{transition:transform .25s ease,opacity .25s}
+.mbar.off{transform:translateY(120%);opacity:0;pointer-events:none}
+.toast i{background:var(--brand);color:#fff}
+@media (max-width:1000px){
+  .hv{min-height:max(640px,calc(100svh - 52px))}
+  .hv .dots{display:none}
+  .mega{font-size:clamp(40px,12.5vw,120px)}
+  .qconsult button{background:var(--brand);color:#fff}
+}
 /* ===== 검토 반영 ===== */
 .log #logs{display:block;padding:0;border:0}
 #logs>div{display:flex;gap:10px;padding:6px 0;border-bottom:1px dashed var(--line);color:var(--ink-2);flex-wrap:wrap}
@@ -763,7 +783,7 @@ table.list th,.cmp th{background:#fff}
     <div class="grid2">
       <div class="f" data-f="hospital"><label for="hospital">병원명 <em>*</em></label><input id="hospital" maxlength="40" placeholder="예) ○○정신건강의학과의원" autocomplete="organization"><span class="msg">병원명을 적어 주세요</span></div>
       <div class="f" data-f="name"><label for="name">성함 <em>*</em></label><input id="name" maxlength="20" placeholder="예) 홍길동" autocomplete="name"><span class="msg">성함을 적어 주세요</span></div>
-      <div class="f" data-f="phone"><label for="phone">연락처 <em>*</em></label><input id="phone" inputmode="tel" maxlength="13" placeholder="휴대폰 또는 병원 전화" autocomplete="tel"><span class="msg">연락받을 번호를 정확히 적어 주세요</span></div>
+      <div class="f" data-f="phone"><label for="phone">연락처 <em>*</em></label><input id="phone" inputmode="tel" maxlength="20" placeholder="휴대폰 또는 병원 전화" autocomplete="tel"><span class="msg">연락받을 번호를 정확히 적어 주세요</span></div>
       <div class="f" data-f="region"><label for="region">지역 <em>*</em></label><select id="region"><option value="">선택해 주세요</option><option>서울</option><option>경기</option><option>인천</option><option>강원</option><option>충청</option><option>전라</option><option>경상</option><option>제주</option></select><span class="msg">지역을 골라 주세요</span></div>
     </div>
     <div class="f"><label for="memo">문의 내용</label><textarea id="memo" maxlength="1000" placeholder="개원 예정 시기, 필요한 품목 등 편하게 적어 주세요"></textarea></div>
@@ -906,14 +926,15 @@ table.list th,.cmp th{background:#fff}
   function closeAll(){ document.querySelectorAll('.modal,.drawer').forEach(function(m){ m.hidden = true; }); $('sheet').hidden = true; }
 
   // ----- 화면 전환 -----
-  var view = 'site';
+  var view = 'site', siteY = 0;
   function go(v, push, keepUrl){
+    if (view === 'site' && v !== 'site') siteY = window.scrollY;
     view = v;
     $('site').hidden = v !== 'site'; $('admin').hidden = v !== 'admin'; $('how').hidden = v !== 'how';
     document.querySelectorAll('.demobar [data-go]').forEach(function(b){ b.classList.toggle('on', b.dataset.go === v); });
     closeAll();
     if (v === 'admin') showAdmin();
-    if (v !== 'site') window.scrollTo(0, 0);
+    if (v !== 'site') window.scrollTo(0, 0); else if (siteY) setTimeout(function(){ window.scrollTo(0, siteY); }, 0);
     slider.run(v === 'site');
     if (keepUrl) return;
     var h = v === 'site' ? location.pathname + location.search : '#' + v;
@@ -938,6 +959,9 @@ table.list th,.cmp th{background:#fff}
   var hd = $('hd');
   function onScroll(){ hd.classList.toggle('solid', window.scrollY > 40); }
   window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  // 메인이 보이는 동안 휴대폰 하단 바 숨김 (상담 바를 가리지 않게)
+  if ('IntersectionObserver' in window){ var mb = document.querySelector('.mbar'); new IntersectionObserver(function(es){ mb.classList.toggle('off', es[0].isIntersecting && es[0].intersectionRatio > .35); }, {threshold:[0,.35,.6,1]}).observe(document.querySelector('.hv')); }
 
   // ----- 메인 슬라이드 -----
   var slider = (function(){
@@ -1004,7 +1028,7 @@ table.list th,.cmp th{background:#fff}
       $('cform').reset();
       document.querySelectorAll('.f.err').forEach(function(f){ f.classList.remove('err'); });
       if (view === 'site') $('doneModal').hidden = false; else if (view === 'admin' && authed) renderAdmin();
-      setTimeout(function(){ toast('<i>문자</i><span><b>담당자 휴대폰 알림 (예시)</b><br>[새 상담] ' + esc(item.hospital) + ' · ' + esc(item.region) + ' · ' + esc(types.join('·')) + '</span>', 4200); }, 600);
+      setTimeout(function(){ toast('<i>SMS</i><span><b>담당자 휴대폰 알림 (예시)</b><br>[새 상담] ' + esc(item.hospital) + ' · ' + esc(item.region) + ' · ' + esc(types.join('·')) + '</span>', 4200); }, 600);
       btn.disabled = false; btn.textContent = '상담 신청하기'; sending = false;
     }, 700);
   };
@@ -1018,7 +1042,7 @@ table.list th,.cmp th{background:#fff}
     if (hsp){ $('hospital').value = hsp; setErr('hospital', false); }
     document.getElementById('consult').scrollIntoView({behavior:'smooth'});
     setTimeout(function(){ (hsp ? $('name') : $('hospital')).focus({preventScroll:true}); }, 700);
-    toast('입력하신 내용을 상담 신청서에 옮겨 놨어요. 나머지만 채워 주세요', 2600);
+    toast(t || r || hsp ? '입력하신 내용을 상담 신청서에 옮겨 놨어요. 나머지만 채워 주세요' : '아래 상담 신청서를 채워 주세요', 2600);
   };
 
   // ----- 관리자 -----
@@ -1029,10 +1053,10 @@ table.list th,.cmp th{background:#fff}
   document.querySelectorAll('[data-tab]').forEach(function(b){ b.onclick = function(){ document.querySelectorAll('[data-tab]').forEach(function(x){ x.classList.toggle('on', x === b); }); $('tabList').hidden = b.dataset.tab !== 'list'; $('tabEdit').hidden = b.dataset.tab !== 'edit'; if (b.dataset.tab === 'edit') fillEdit(); }; });
   function opts(sel){ return Object.keys(STATUS).map(function(k){ return '<option value="' + k + '"' + (k === sel ? ' selected' : '') + '>' + STATUS[k] + '</option>'; }).join(''); }
   function renderAdmin(){
-    var q = $('q').value.trim(), c = {new:0, ing:0, done:0};
+    var q = $('q').value.trim(), qd = q.replace(/\D/g, ''), c = {new:0, ing:0, done:0};
     db.items.forEach(function(i){ c[i.st]++; });
     $('kNew').textContent = c.new; $('kIng').textContent = c.ing; $('kDone').textContent = c.done; $('kAll').textContent = db.items.length;
-    var list = db.items.filter(function(i){ return (!fst || i.st === fst) && (!q || (i.hospital + ' ' + i.name + ' ' + i.phone).indexOf(q) >= 0); });
+    var list = db.items.filter(function(i){ return (!fst || i.st === fst) && (!q || (i.hospital + ' ' + i.name + ' ' + i.phone).indexOf(q) >= 0 || (qd.length > 2 && i.phone.replace(/\D/g, '').indexOf(qd) >= 0)); });
     $('rows').innerHTML = list.length ? list.map(function(i){
       return '<tr data-row="' + i.id + '"><td>' + stamp(new Date(i.at)) + '</td><td><b>' + esc(i.hospital) + '</b><div class="ex">' + esc(i.name) + '</div></td><td class="hm">' + esc(i.type.join('·')) + '</td><td class="hm">' + esc(i.region) + '</td><td class="hm">' + esc(i.phone) + '</td><td><select class="st ' + i.st + '" data-id="' + i.id + '" aria-label="처리 상태">' + opts(i.st) + '</select></td></tr>';
     }).join('') : '<tr><td colspan="6" class="empty">해당하는 상담이 없어요</td></tr>';
