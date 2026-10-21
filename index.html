@@ -580,6 +580,26 @@ table.list tr[data-row]:hover td{background:#fafcff}
 }
 
 
+
+/* ===== 사진 크게 ===== */
+.s3.value{max-width:1440px}
+.value{grid-template-columns:.55fr 2fr;gap:48px}
+.vcards{gap:20px}
+.vc .im{border-radius:28px}
+.vc.tall .im{height:620px}
+.vc.mid .im{height:520px}
+.vc.short .im{height:440px;margin-bottom:80px}
+.vc figcaption{font-size:15px}
+.vc figcaption b{font-size:20px}
+.vc .im span{font-size:18px;right:20px;bottom:18px}
+#logistics{max-width:1440px}
+.darkcard{min-height:620px;border-radius:32px;padding:56px}
+.darkcard .steps b{font-size:22px}
+@media (max-width:1000px){
+  .vcards{grid-auto-columns:84%}
+  .vc.tall .im,.vc.mid .im,.vc.short .im{height:420px;margin:0}
+  .darkcard{min-height:520px;padding:28px 22px}
+}
 /* ===== 2차 검토 반영 ===== */
 html{scroll-padding-top:96px}
 .hv{min-height:calc(100vh - 56px);min-height:calc(100svh - 56px)}
@@ -717,9 +737,9 @@ table.list th,.cmp th{background:#fff}
     <a class="pill blk" href="#consult">상담 신청 <span class="ar"><svg width="14" height="14"><use href="#i-out"/></svg></span></a>
   </div>
   <div class="vcards">
-    <figure class="vc tall reveal"><div class="im"><img src="https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=800&q=70&auto=format&fit=crop" alt=""><span>Supply</span></div><figcaption><b>의약품 전문 공급</b>향정 전문 관리 · 품절 예상 품목 사전 안내 · 정기 납품</figcaption></figure>
-    <figure class="vc mid reveal"><div class="im"><img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=900&q=70&auto=format&fit=crop" alt="" style="object-position:20% 50%"><span>Clinic</span></div><figcaption><b>개원 컨설팅</b>입지 분석 · 인허가 안내 · 초도 의약품 구성</figcaption></figure>
-    <figure class="vc short reveal"><div class="im"><img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=700&q=70&auto=format&fit=crop" alt=""><span>Growth</span></div><figcaption><b>마케팅 지원</b>홈페이지·블로그 · 지도 노출 · 광고 심의 안내</figcaption></figure>
+    <figure class="vc tall reveal"><div class="im"><img src="https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=1200&q=70&auto=format&fit=crop" alt=""><span>Supply</span></div><figcaption><b>의약품 전문 공급</b>향정 전문 관리 · 품절 예상 품목 사전 안내 · 정기 납품</figcaption></figure>
+    <figure class="vc mid reveal"><div class="im"><img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1100&q=70&auto=format&fit=crop" alt="" style="object-position:20% 50%"><span>Clinic</span></div><figcaption><b>개원 컨설팅</b>입지 분석 · 인허가 안내 · 초도 의약품 구성</figcaption></figure>
+    <figure class="vc short reveal"><div class="im"><img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1000&q=70&auto=format&fit=crop" alt=""><span>Growth</span></div><figcaption><b>마케팅 지원</b>홈페이지·블로그 · 지도 노출 · 광고 심의 안내</figcaption></figure>
   </div>
 </section>
 
@@ -747,7 +767,7 @@ table.list th,.cmp th{background:#fff}
     <div><i><svg width="30" height="30"><use href="#i-truck"/></svg></i><b>당일·익일 도착</b><span>지역별 배송 안내</span></div>
   </div>
   <div class="darkcard" style="text-align:left">
-    <img src="https://images.unsplash.com/photo-1586015555751-63bb77f4322a?w=1800&q=60&auto=format&fit=crop" alt="">
+    <img src="https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=2000&q=70&auto=format&fit=crop" alt="">
     <div class="steps">
       <div><em>STEP 01</em><b>주문 접수</b><span>기존 주문 시스템으로 주문</span></div>
       <div><em>STEP 02</em><b>검수·포장</b><span>유효기간·수량 이중 확인</span></div>
