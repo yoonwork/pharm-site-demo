@@ -670,6 +670,15 @@ table.list th,.cmp th{background:#fff}
 
 /* 큰 문장 강조 */
 .statement3 .hl{color:var(--brand);background:linear-gradient(transparent 68%,rgba(31,95,191,.14) 68%);padding:0 .05em}
+
+/* 슬라이드 전환 부드럽게 */
+.hv>img{transform:scale(1);transition:opacity 1.6s ease-in-out}
+.hv>img.on{animation:kb2 7.5s cubic-bezier(.25,.6,.3,1) forwards}
+@keyframes kb2{from{transform:scale(1.07)}to{transform:scale(1)}}
+.mega{transition:opacity .5s ease,transform .6s cubic-bezier(.2,.7,.2,1)!important}
+.mega.out{opacity:0!important;transform:translateY(-14px)}
+.mega.pre{opacity:0!important;transform:translateY(16px);transition:none!important}
+@media (prefers-reduced-motion:reduce){.hv>img.on{animation:none}.mega,.mega.out,.mega.pre{transform:none;transition:opacity .3s!important}}
 </style>
 </head>
 <body>
@@ -990,7 +999,7 @@ table.list th,.cmp th{background:#fff}
   var slider = (function(){
     var imgs = document.querySelectorAll('.hv>img'), dots = document.querySelectorAll('#dots button'), sl = $('slogan');
     var words = ['Steady Care','Open With Us','Safe Delivery'], k = 0, t = null, reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    function show(n){ k = n; imgs.forEach(function(im, i){ im.classList.toggle('on', i === n); }); dots.forEach(function(d, i){ d.classList.toggle('on', i === n); d.setAttribute('aria-pressed', String(i === n)); }); sl.style.opacity = 0; setTimeout(function(){ sl.textContent = words[n]; sl.style.opacity = 1; }, 250); }
+    function show(n){ k = n; imgs.forEach(function(im, i){ im.classList.toggle('on', i === n); }); dots.forEach(function(d, i){ d.classList.toggle('on', i === n); d.setAttribute('aria-pressed', String(i === n)); }); sl.classList.add('out'); setTimeout(function(){ sl.textContent = words[n]; sl.classList.remove('out'); sl.classList.add('pre'); void sl.offsetWidth; requestAnimationFrame(function(){ sl.classList.remove('pre'); }); }, 520); }
     function run(on){ clearInterval(t); t = null; if (on && !reduce && !document.hidden) t = setInterval(function(){ show((k + 1) % imgs.length); }, 6000); }
     dots.forEach(function(d, i){ d.onclick = function(){ show(i); run(view === 'site'); }; });
     document.addEventListener('visibilitychange', function(){ run(view === 'site'); });
