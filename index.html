@@ -679,6 +679,17 @@ table.list th,.cmp th{background:#fff}
 .mega.out{opacity:0!important;transform:translateY(-14px)}
 .mega.pre{opacity:0!important;transform:translateY(16px);transition:none!important}
 @media (prefers-reduced-motion:reduce){.hv>img.on{animation:none}.mega,.mega.out,.mega.pre{transform:none;transition:opacity .3s!important}}
+
+/* 한글 큰 제목 */
+.mega{font-family:Pretendard,sans-serif;font-weight:800;letter-spacing:-.05em;font-size:clamp(34px,8.4vw,128px);line-height:1.05}
+.hv .eng{font-family:"Inter Tight",sans-serif;font-weight:600;letter-spacing:.18em;text-transform:uppercase;font-size:clamp(12px,1.1vw,15px);opacity:.85;margin:0 0 18px}
+.serif,.value h2{font-family:Pretendard,sans-serif;font-weight:800;letter-spacing:-.05em}
+.value h2{font-size:clamp(36px,4.2vw,58px);line-height:1.12}
+.feat h2,.ttlrow h2{font-size:clamp(34px,4.4vw,60px)}
+.order2 h3{font-size:clamp(24px,2.8vw,36px)}
+.consult2 h2{font-size:clamp(44px,5.6vw,80px);line-height:1.05}
+.marq{font-family:Pretendard,sans-serif;font-weight:800;letter-spacing:-.05em;font-size:clamp(48px,8vw,120px)}
+@media (max-width:1000px){.mega{font-size:clamp(32px,9.2vw,72px)}}
 </style>
 </head>
 <body>
@@ -723,8 +734,9 @@ table.list th,.cmp th{background:#fff}
   <img src="https://images.unsplash.com/photo-1586015555751-63bb77f4322a?w=2000&q=70&auto=format&fit=crop" alt="" loading="lazy">
   <div class="dots" id="dots"><button class="on" aria-label="1번 화면"></button><button aria-label="2번 화면"></button><button aria-label="3번 화면"></button></div>
   <div class="center">
-    <p class="mega" id="slogan">Steady Care</p>
-    <p class="kosub">원장님의 진료가 멈추지 않도록. 정신과 전문 의약품 공급부터 개원과 마케팅까지 한 곳에서.</p>
+    <p class="eng">Steady Care</p>
+    <p class="mega" id="slogan">진료가 멈추지 않도록</p>
+    <p class="kosub">정신과 전문 의약품 공급부터 개원과 마케팅까지, 한 곳에서 책임지고 함께합니다.</p>
   </div>
   <form class="qconsult" id="qform">
     <label><span>상담 분야</span><select id="qType"><option value="">선택해 주세요</option><option value="납품">의약품 납품</option><option value="개원">개원 컨설팅</option><option value="마케팅">마케팅</option><option value="기타">기타</option></select></label>
@@ -736,7 +748,7 @@ table.list th,.cmp th{background:#fff}
 
 <section class="s3" id="about">
   <div class="badges reveal"><span><svg width="16" height="16"><use href="#i-shield"/></svg>정신과 전문 유통</span><span><svg width="16" height="16"><use href="#i-check"/></svg><b class="count" data-to="320">0</b>+ 거래 의원 <em class="ex">(예시)</em></span></div>
-  <h2 class="statement3 reveal">원장님의 진료가<br><span class="hl">멈추지 않도록</span></h2>
+  <h2 class="statement3 reveal">약 걱정은 저희가,<br>원장님은 <span class="hl">진료에만</span></h2>
   <p class="lead3 reveal">정신과 원장님께 필요한 전문 의약품을 빠짐없이 공급하고, 개원 준비와 병원 운영까지 함께 고민합니다.</p>
   <div class="nums3 reveal"><div><b><span class="count" data-to="320">0</span><sup>+</sup></b><span>거래 의원</span></div><div><b><span class="count" data-to="99.8" data-dec="1">0</span><sup>%</sup></b><span>적시 납품률</span></div><div><b><span class="count" data-to="45">0</span><sup>+</sup></b><span>개원 컨설팅</span></div><div><b><span class="count" data-to="8">0</span><sup>년</sup></b><span>정신과 전문 유통</span></div></div>
   <p class="ex" style="text-align:center;margin-top:10px">숫자·연혁·조직은 예시예요. 실제 자료를 받아 바꿔요.</p>
@@ -745,7 +757,7 @@ table.list th,.cmp th{background:#fff}
 <section class="s3 value" id="biz">
   <div class="vleft reveal">
     <span class="tagpill"><i></i>01 Our Business</span>
-    <h2>Not Just<br>a Supplier</h2>
+    <h2>공급, 그 이상의<br>파트너</h2>
     <p>의약품 공급만이 아니라, 개원 준비와 환자 유입까지 이어서 돕습니다.</p>
     <a class="pill blk" href="#consult">상담 신청 <span class="ar"><svg width="14" height="14"><use href="#i-out"/></svg></span></a>
   </div>
@@ -771,7 +783,7 @@ table.list th,.cmp th{background:#fff}
 
 <section class="s2 feat reveal" id="logistics">
   <span class="lbl" style="justify-content:center">Logistics</span>
-  <h2 class="serif">Safe Delivery</h2>
+  <h2 class="serif">안전하게, 제때</h2>
   <p class="sub">의약품 유통품질관리기준(KGSP)에 맞춘 보관·배송 체계로, 향정은 한 알까지 기록합니다. <span class="ex">(문구는 예시예요)</span></p>
   <div class="icons5">
     <div><i><svg width="30" height="30"><use href="#i-temp"/></svg></i><b>온도·습도 관리</b><span>24시간 보관 기록</span></div>
@@ -791,7 +803,7 @@ table.list th,.cmp th{background:#fff}
 </section>
 
 <section class="s2 reveal" id="partners" style="padding-top:0">
-  <div class="ttlrow"><h2 class="serif">Partners</h2><span class="ex">로고를 누르면 각 제약사 공식 홈페이지로 이동해요. (실제 로고는 받아서 넣어요)</span></div>
+  <div class="ttlrow"><h2 class="serif">함께하는 제약사</h2><span class="ex">로고를 누르면 각 제약사 공식 홈페이지로 이동해요. (실제 로고는 받아서 넣어요)</span></div>
   <div class="logos2" id="logos"></div>
   <div class="portal" id="portal">
     <a href="https://www.kims.co.kr" target="_blank" rel="noopener">KIMS <small>의약품 정보</small><svg width="14" height="14"><use href="#i-out"/></svg></a>
@@ -799,12 +811,12 @@ table.list th,.cmp th{background:#fff}
     <a href="https://www.nims.or.kr" target="_blank" rel="noopener">NIMS <small>마약류 통합관리</small><svg width="14" height="14"><use href="#i-out"/></svg></a>
     <a href="https://www.kpis.or.kr" target="_blank" rel="noopener">KPIS <small>의약품관리종합정보</small><svg width="14" height="14"><use href="#i-out"/></svg></a>
   </div>
-  <div class="order2"><div><h3 class="serif">Order Online</h3><p>의약품 주문은 기존에 쓰시던 주문 시스템에서 그대로 하시면 돼요.</p></div><a class="pill w" href="#" data-order>주문 시스템 열기 <span class="ar"><svg width="14" height="14"><use href="#i-out"/></svg></span></a></div>
+  <div class="order2"><div><h3 class="serif">온라인 의약품 주문</h3><p>의약품 주문은 기존에 쓰시던 주문 시스템에서 그대로 하시면 돼요.</p></div><a class="pill w" href="#" data-order>주문 시스템 열기 <span class="ar"><svg width="14" height="14"><use href="#i-out"/></svg></span></a></div>
 </section>
 
 <section class="s2" id="consult" style="padding-top:0"><div class="consult2">
   <div>
-    <h2 class="serif">Let's<br>Talk</h2>
+    <h2 class="serif">편하게<br>물어보세요</h2>
     <p class="ko">상담을 남겨 주시면 담당자가 바로 연락드려요</p>
     <p class="muted" style="color:var(--ink-2);margin:0">신청이 들어오면 담당자 휴대폰으로 바로 알림이 가요.</p>
     <div class="pts"><div><b>접수 즉시 알림</b><span>문자·이메일 (알림톡 승인 후 전환)</span></div><div><b>당일 회신</b><span>평일 오후 5시 전 신청 기준</span></div><div><b>안전한 정보 보관</b><span>상담 목적 외 사용 안 함</span></div></div>
@@ -825,7 +837,7 @@ table.list th,.cmp th{background:#fff}
 </div></section>
 
 <section class="s2" id="map" style="padding-top:0">
-  <div class="ttlrow"><h2 class="serif">Location</h2></div>
+  <div class="ttlrow"><h2 class="serif">오시는 길</h2></div>
   <div class="map2">
     <div class="mapbox"><iframe title="지도" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=126.64%2C37.52%2C126.70%2C37.56&amp;layer=mapnik&amp;marker=37.5455%2C126.6760"></iframe><span class="note">위치는 예시예요. 실제 사이트에서는 카카오맵(또는 네이버 지도) API로 넣어요</span></div>
     <div class="addr">
@@ -839,7 +851,7 @@ table.list th,.cmp th{background:#fff}
 </section>
 
 <footer class="ft2">
-  <div class="marq serif" aria-hidden="true"><span>OO Pharm ✱ Steady Care ✱ OO Pharm ✱ Steady Care ✱</span><span>OO Pharm ✱ Steady Care ✱ OO Pharm ✱ Steady Care ✱</span></div>
+  <div class="marq serif" aria-hidden="true"><span>○○팜 ✱ 진료가 멈추지 않도록 ✱ ○○팜 ✱ 진료가 멈추지 않도록 ✱</span><span>○○팜 ✱ 진료가 멈추지 않도록 ✱ ○○팜 ✱ 진료가 멈추지 않도록 ✱</span></div>
   <div class="info"><div><b>○○팜 (예시)</b><br>대표 ○○○ · 사업자등록번호 000-00-00000 · 의약품도매업 허가 제0000호<br>인천광역시 서구 ○○로 00 · 대표 전화 000-0000-0000</div><div><a href="#" id="privacyLink">개인정보처리방침</a><a href="#consult">상담 신청</a></div></div>
 </footer>
 
@@ -998,7 +1010,7 @@ table.list th,.cmp th{background:#fff}
   // ----- 메인 슬라이드 -----
   var slider = (function(){
     var imgs = document.querySelectorAll('.hv>img'), dots = document.querySelectorAll('#dots button'), sl = $('slogan');
-    var words = ['Steady Care','Open With Us','Safe Delivery'], k = 0, t = null, reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var words = ['진료가 멈추지 않도록','개원부터 함께합니다','안전하게, 제때 도착'], k = 0, t = null, reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
     function show(n){ k = n; imgs.forEach(function(im, i){ im.classList.toggle('on', i === n); }); dots.forEach(function(d, i){ d.classList.toggle('on', i === n); d.setAttribute('aria-pressed', String(i === n)); }); sl.classList.add('out'); setTimeout(function(){ sl.textContent = words[n]; sl.classList.remove('out'); sl.classList.add('pre'); void sl.offsetWidth; requestAnimationFrame(function(){ sl.classList.remove('pre'); }); }, 520); }
     function run(on){ clearInterval(t); t = null; if (on && !reduce && !document.hidden) t = setInterval(function(){ show((k + 1) % imgs.length); }, 6000); }
     dots.forEach(function(d, i){ d.onclick = function(){ show(i); run(view === 'site'); }; });
